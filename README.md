@@ -27,6 +27,17 @@ UMS is designed to serve as the canonical representation of a model throughout i
 
 \---
 
+## Motivation
+
+- Modern multi-model databases need a unified modelling schema that is database type (relational/graph/multi-model) agnostic; and
+- Data models lose meaning as they move from design to implementation.
+
+A carefully constructed Fact-Based Model, rich with natural-language verbalisations and explicit relationship semantics, becomes a flat collection of tables and foreign keys the moment it reaches a relational DDL. In a graph database, relationships gain names but lose their fact-based grounding. In a document store, structure flattens and semantics dissolve entirely.
+
+UMS addresses this by treating the semantic content of a model as a first-class artefact — something that travels with the schema, not something that is discarded at the point of physical design.
+
+\---
+
 ## Schema Structure
 
 A UMS document is a YAML list of typed objects. Each object may contain the following top-level keys:
@@ -87,15 +98,15 @@ The following excerpt models a `Person` entity type and a `PersonLikesFilm` rela
   Labels:
     - Person
   PrimaryKey:
-    - Person\_Id
+    - Person_Id
   Properties:
-    - Name: Person\_Id
+    - Name: Person_Id
       DataType: Integer
       Constraints:
         - NOT NULL
       Readings:
-        - Person\_Id is of Person
-        - Person has Person\_Id
+        - Person_Id is of Person
+        - Person has Person_Id
     - Name: LoginName
       DataType: TextVariableLength
       Length: 100
@@ -110,8 +121,8 @@ The following excerpt models a `Person` entity type and a `PersonLikesFilm` rela
   Label: LIKES
   RelationshipAnnotation: Person likes Film
   PrimaryKey:
-    - Film\_Id
-    - Person\_Id
+    - Film_Id
+    - Person_Id
   Properties:
     - Name: Rating
       DataType: TextVariableLength
@@ -120,12 +131,22 @@ The following excerpt models a `Person` entity type and a `PersonLikesFilm` rela
       Source: PersonLikesFilm
       Target: Person
       From:
-        - Person\_Id
+        - Person_Id
       To:
-        - Person\_Id
+        - Person_Id
       Readings:
         - PersonLikesFilm involves Person
         - Person is involved in PersonLikesFilm
+    - Name: FilmPersonLikesFilm
+      Source: PersonLikesFilm
+      Target: Film
+      From:
+        - Film_Id
+      To:
+        - Film_Id
+      Readings:
+        - PersonLikesFilm involves Film
+        - Film is involved in PersonLikesFilm
   TypeReadings:
     - Person likes Film
   IsRelationshipType: true
@@ -149,14 +170,6 @@ UMS uses a set of portable, implementation-agnostic data type names that map to 
 |`Date`|Date only|
 |`Binary`|Binary / byte data|
 |`UUID`|Universally unique identifier|
-
-\---
-
-## Motivation
-
-Data models lose meaning as they move from design to implementation. A carefully constructed ORM diagram, rich with natural-language verbalisations and explicit relationship semantics, becomes a flat collection of tables and foreign keys the moment it reaches a relational DDL. In a graph database, relationships gain names but lose their fact-based grounding. In a document store, structure flattens and semantics dissolve entirely.
-
-UMS addresses this by treating the semantic content of a model as a first-class artefact — something that travels with the schema, not something that is discarded at the point of physical design.
 
 \---
 
