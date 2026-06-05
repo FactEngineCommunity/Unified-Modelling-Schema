@@ -1,4 +1,4 @@
-# UnifiedModellingSchema
+# Unified Modelling Schema
 A schema for graph, relational, multimodel, fact-based and AI databases. Built for structure and meaning. Containing also natural language predicates the schema furthers to use with AI.
 
 \---
@@ -60,17 +60,17 @@ A UMS document is a YAML list of typed objects. Each object may contain the foll
 ### Relationship Definition
 
 ```yaml
-- Name: IS\_FOR
+- Name: IS_FOR
   Source: Booking
   Target: Session
   From:
-    - Film\_Id
+    - Film_Id
     - DateTime
-    - Cinema\_Id
+    - Cinema_Id
   To:
-    - Film\_Id
+    - Film_Id
     - DateTime
-    - Cinema\_Id
+    - Cinema_Id
   Readings:
     - Booking is for Session
     - Session has Booking
