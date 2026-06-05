@@ -1,0 +1,468 @@
+- Type: Person
+  Labels:
+  - Person
+  PrimaryKey:
+  - Person_Id
+  Properties:
+  - Name: LoginName
+    DataType: TextVariableLength
+    Length: 100
+    Constraints:
+    - NOT NULL
+    - UNIQUE
+    Readings:
+    - Person has login-LoginName
+  - Name: Person_Id
+    DataType: Integer
+    Constraints:
+    - NOT NULL
+    Readings:
+    - Person_Id is of Person
+    - Person has Person_Id
+  - Name: DateOfBirth
+    DataType: TextVariableLength
+    Readings:
+    - Person has DateOfBirth
+  - Name: Age
+    DataType: TextVariableLength
+    Constraints:
+    - NOT NULL
+    Readings:
+    - Person has Age
+  - Name: FirstName
+    DataType: TextVariableLength
+    Length: 0
+    Readings:
+    - Person has First Name
+    - First Name is of Person
+  - Name: LastName
+    DataType: TextVariableLength
+    Length: 0
+    Readings:
+    - Person has Last Name
+    - Last Name is of Person
+  IsRelationshipType: false
+- Type: Row
+  Labels:
+  - Row
+  PrimaryKey:
+  - RowNr
+  - Cinema_Id
+  Properties:
+  - Name: Cinema_Id
+    DataType: Integer
+    Constraints:
+    - NOT NULL
+    Readings:
+    - Cinema contains Row
+    - Row is in Cinema
+  - Name: RowNr
+    DataType: TextVariableLength
+    Constraints:
+    - NOT NULL
+    Readings:
+    - Row has RowNr
+  Relationships:
+  - Name: IS_IN
+    Source: Row
+    Target: Cinema
+    From:
+    - Cinema_Id
+    To:
+    - Cinema_Id
+    Readings:
+    - Cinema contains Row
+    - Row is in Cinema
+  IsRelationshipType: false
+- Type: PersonLikesFilm
+  Label: LIKES
+  Source: Person
+  Target: Film
+  RelationshipAnnotation: Person likes Film
+  PrimaryKey:
+  - Film_Id
+  - Person_Id
+  Properties:
+  - Name: Rating
+    DataType: TextVariableLength
+  - Name: Film_Id
+    DataType: Integer
+    Constraints:
+    - NOT NULL
+  - Name: Person_Id
+    DataType: Integer
+    Constraints:
+    - NOT NULL
+  Relationships:
+  - Name: FilmPersonLikesFilm
+    Source: PersonLikesFilm
+    Target: Film
+    From:
+    - Film_Id
+    To:
+    - Film_Id
+    Readings:
+    - PersonLikesFilm involves Film
+    - Film is involved in PersonLikesFilm
+  - Name: PersonPersonLikesFilm
+    Source: PersonLikesFilm
+    Target: Person
+    From:
+    - Person_Id
+    To:
+    - Person_Id
+    Readings:
+    - PersonLikesFilm involves Person
+    - Person is involved in PersonLikesFilm
+  TypeReadings:
+  - Person likes Film
+  IsRelationshipType: true
+- Type: Cinema
+  Labels:
+  - Cinema
+  PrimaryKey:
+  - Cinema_Id
+  Properties:
+  - Name: CinemaName
+    DataType: TextVariableLength
+    Length: 100
+    Constraints:
+    - NOT NULL
+    - UNIQUE
+    Readings:
+    - Cinema has CinemaName
+  - Name: Cinema_Id
+    DataType: Integer
+    Constraints:
+    - NOT NULL
+    Readings:
+    - Cinema_Id is of Cinema
+    - Cinema has Cinema_Id
+  IsRelationshipType: false
+- Type: Booking
+  Labels:
+  - Booking
+  PrimaryKey:
+  - Person_Id
+  - DateTime
+  - Film_Id
+  - Cinema_Id
+  Properties:
+  - Name: Cinema_Id
+    DataType: Integer
+    Constraints:
+    - NOT NULL
+  - Name: SeatCount
+    DataType: TextVariableLength
+    Constraints:
+    - NOT NULL
+  - Name: DateTime
+    DataType: TextVariableLength
+    Constraints:
+    - NOT NULL
+  - Name: Film_Id
+    DataType: Integer
+    Constraints:
+    - NOT NULL
+  - Name: Person_Id
+    DataType: Integer
+    Constraints:
+    - NOT NULL
+  Relationships:
+  - Name: IS_FOR
+    Source: Booking
+    Target: Person
+    From:
+    - Person_Id
+    To:
+    - Person_Id
+    Readings:
+    - Booking is for Person
+    - Person made Booking
+  - Name: IS_FOR
+    Source: Booking
+    Target: Session
+    From:
+    - Film_Id
+    - DateTime
+    - Cinema_Id
+    To:
+    - Film_Id
+    - DateTime
+    - Cinema_Id
+    Readings:
+    - Booking is for Session
+    - Session has Booking
+  TypeReadings:
+  - Person booked Session
+  IsRelationshipType: false
+- Type: Teenager
+  Labels:
+  - Teenager
+  Properties:
+  - Name: FirstName
+    DataType: TextVariableLength
+    Length: 0
+    Readings:
+    - Person has First Name
+    - First Name is of Person
+  - Name: LastName
+    DataType: TextVariableLength
+    Length: 0
+    Readings:
+    - Person has Last Name
+    - Last Name is of Person
+  IsRelationshipType: false
+- Type: Section
+  Labels:
+  - Section
+  PrimaryKey:
+  - Section_Name
+  Properties:
+  - Name: Section_Name
+    DataType: TextVariableLength
+    Length: 100
+    Constraints:
+    - NOT NULL
+    Readings:
+    - Section has Section_Name
+    - Section_Name is of Section
+  IsRelationshipType: false
+- Type: Child
+  Labels:
+  - Child
+  Properties:
+  - Name: FirstName
+    DataType: TextVariableLength
+    Length: 0
+    Readings:
+    - Person has First Name
+    - First Name is of Person
+  - Name: LastName
+    DataType: TextVariableLength
+    Length: 0
+    Readings:
+    - Person has Last Name
+    - Last Name is of Person
+  IsRelationshipType: false
+- Type: Film
+  Labels:
+  - Film
+  PrimaryKey:
+  - Film_Id
+  Properties:
+  - Name: Film_Id
+    DataType: Integer
+    Constraints:
+    - NOT NULL
+    Readings:
+    - Film_Id is of Film
+    - Film has Film_Id
+  - Name: Name
+    DataType: TextVariableLength
+    Length: 0
+    Constraints:
+    - NOT NULL
+    - UNIQUE
+    Readings:
+    - Film has Film Name
+  IsRelationshipType: false
+- Type: Adult
+  Labels:
+  - Adult
+  Properties:
+  - Name: FirstName
+    DataType: TextVariableLength
+    Length: 0
+    Readings:
+    - Person has First Name
+    - First Name is of Person
+  - Name: LastName
+    DataType: TextVariableLength
+    Length: 0
+    Readings:
+    - Person has Last Name
+    - Last Name is of Person
+  IsRelationshipType: false
+- Type: Session
+  Labels:
+  - Session
+  PrimaryKey:
+  - DateTime
+  - Film_Id
+  - Cinema_Id
+  Properties:
+  - Name: Cinema_Id
+    DataType: Integer
+    Constraints:
+    - NOT NULL
+  - Name: DateTime
+    DataType: TextVariableLength
+    Constraints:
+    - NOT NULL
+  - Name: Film_Id
+    DataType: Integer
+    Constraints:
+    - NOT NULL
+  Relationships:
+  - Name: IS_AT
+    Source: Session
+    Target: Cinema
+    From:
+    - Cinema_Id
+    To:
+    - Cinema_Id
+    Readings:
+    - Cinema hosts Session
+    - Session is at Cinema
+  - Name: IS_FOR
+    Source: Session
+    Target: Film
+    From:
+    - Film_Id
+    To:
+    - Film_Id
+    Readings:
+    - Film is shown in Session
+    - Session is for Film
+    - Session is showing Film
+  TypeReadings:
+  - Film is showing on DateTime at Cinema
+  - Cinema is showing Film on DateTime
+  - DateTime has Film showing at Cinema
+  - Cinema on DateTime is showing Film
+  IsRelationshipType: false
+- Type: Seat
+  Labels:
+  - Seat
+  PrimaryKey:
+  - Cinema_Id
+  - Letter
+  - RowNr
+  Properties:
+  - Name: Cinema_Id
+    DataType: Integer
+    Constraints:
+    - NOT NULL
+    Readings:
+    - Seat is in Row
+    - Row contains Seat
+  - Name: RowNr
+    DataType: TextVariableLength
+    Constraints:
+    - NOT NULL
+    Readings:
+    - Seat is in Row
+    - Row contains Seat
+  - Name: Letter
+    DataType: TextVariableLength
+    Length: 1
+    Constraints:
+    - NOT NULL
+    Readings:
+    - Seat has Letter
+    - Letter is for Seat
+  - Name: Section_Name
+    DataType: TextVariableLength
+    Length: 100
+    Constraints:
+    - NOT NULL
+    Readings:
+    - Seat is in Section
+    - Section has Seat
+  Relationships:
+  - Name: IS_IN
+    Source: Seat
+    Target: Section
+    From:
+    - Section_Name
+    To:
+    - Section_Name
+    Readings:
+    - Seat is in Section
+    - Section has Seat
+  - Name: IS_IN
+    Source: Seat
+    Target: Row
+    From:
+    - Cinema_Id
+    - RowNr
+    To:
+    - Cinema_Id
+    - RowNr
+    Readings:
+    - Seat is in Row
+    - Row contains Seat
+  IsRelationshipType: false
+- Type: BookingHasSeat
+  Label: HAS
+  Source: Booking
+  Target: Seat
+  RelationshipAnnotation: Booking has Seat
+  PrimaryKey:
+  - PersonId
+  - FilmId
+  - DateTime
+  - CinemaId
+  - RowNr
+  - Cinema_Id
+  - Letter
+  Properties:
+  - Name: PersonId
+    DataType: Integer
+    Constraints:
+    - NOT NULL
+  - Name: FilmId
+    DataType: Integer
+    Constraints:
+    - NOT NULL
+  - Name: DateTime
+    DataType: TextVariableLength
+    Constraints:
+    - NOT NULL
+  - Name: CinemaId
+    DataType: Integer
+    Constraints:
+    - NOT NULL
+  - Name: RowNr
+    DataType: TextVariableLength
+  - Name: Cinema_Id
+    DataType: Integer
+  - Name: Letter
+    DataType: TextVariableLength
+    Length: 1
+  Relationships:
+  - Name: BookingBookingHasSeat
+    Source: BookingHasSeat
+    Target: Booking
+    From:
+    - PersonId
+    - FilmId
+    - DateTime
+    - CinemaId
+    To:
+    - Cinema_Id
+    - DateTime
+    - Film_Id
+    - Person_Id
+    Readings:
+    - BookingHasSeat involves Booking
+    - Booking is involved in BookingHasSeat
+  - Name: SeatBookingHasSeat
+    Source: BookingHasSeat
+    Target: Seat
+    From:
+    - RowNr
+    - Cinema_Id
+    - Letter
+    To:
+    - Cinema_Id
+    - RowNr
+    - Letter
+    Readings:
+    - BookingHasSeat involves Seat
+    - Seat is involved in BookingHasSeat
+  TypeReadings:
+  - Booking has Seat
+  - Seat is of Booking
+  IsRelationshipType: true
