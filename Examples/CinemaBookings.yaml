@@ -70,6 +70,8 @@
     - Cinema_Id
     To:
     - Cinema_Id
+    Embed: true
+    Cardinality: Many
     Readings:
     - Cinema contains Row
     - Row is in Cinema
@@ -390,6 +392,8 @@
     To:
     - Cinema_Id
     - RowNr
+    Embed: true
+    Cardinality: Many
     Readings:
     - Seat is in Row
     - Row contains Seat
