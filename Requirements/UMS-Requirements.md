@@ -38,7 +38,7 @@ Data Types needed to be listed by name, with annotation as to length and decimal
 
 The following are the UMS requirements for graph databases.
 
-## Nodes/Verticies
+## Node Types/Verticies
 
 Node Types need to be included by name.
 
@@ -50,7 +50,13 @@ Data Types for Property must include Length and Precision where required.
 
 ## Edges / Relationships
 
+Edges/Relationships must be catered for, including any Properties that are specific to a Relationship, including the metadata for the Properties (DataType, Length, Precision).
+
 ## Label / Labels
+
+Each Edge/Relationship is to have one Label (E.g. IS_IN) for a Graph Schema within the UMS, and each Node Type must be able to have one or more Labels (E.g. Person, Employee).
+
+NB Labels are optional, but if there is to be a Graph Schema within the overall UMS document, then the Label/Labels for the relevant Relationship/Node Types must be included.
 
 =======================
 
@@ -60,11 +66,24 @@ The following are the UMS requirements for Fact-Based/Semantic modelling.
 
 ## Value Types
 
+Value Types must be captured, including DataType and Length and Precision where required. Value Types may appear by way of Attributes/Properties/Fields/Columns.
+
 ## Entity Types
+
+Entity Types must be captured, and may be by way of Tables/Node Types.
 
 ## Fact Types
 
+Fact Types must be able to be captured, but may be implied by Fact Type Readings, or Tables/Node Types when it comes to Objectified Fact Types.
+
 ## Fact Type Readings
 
+Fact Type Readings must be able to be Captured for Relationships, Properties and Objectified Fact Types, and as each Fact Type Reading implies a Fact Type.
+
 ## Constraints
+
+- Uniqueness Constraints must be able to be captured (both Internal Uniqueness Constraints (E.g. A manifest as Primary Keys), and External Uniqueness Constraints (E.g. As manifest as either Primary Keys or Uniqueness Constraints).
+
+
+
 
