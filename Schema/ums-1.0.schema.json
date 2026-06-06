@@ -1,0 +1,245 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/FactEngineAI/UnifiedModellingSchema/schema/ums-1.0.schema.json",
+  "title": "Unified Modelling Schema (UMS) 1.0",
+  "description": "Validates a UMS YAML document representing a data model across graph, relational, multi-model, fact-based, and AI databases.",
+  "type": "array",
+  "minItems": 1,
+  "items": {
+    "$ref": "#/$defs/TypeDefinition"
+  },
+
+  "$defs": {
+
+    "TypeDefinition": {
+      "type": "object",
+      "description": "A single entity type or relationship type in the model.",
+      "required": ["Type", "IsRelationshipType"],
+      "properties": {
+
+        "Type": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The name of the entity or relationship type."
+        },
+
+        "Labels": {
+          "type": "array",
+          "description": "Graph labels or relational table names for this type. Used on entity types.",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+
+        "Label": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Short edge label for relationship types (e.g. LIKES, HAS). Used on relationship types."
+        },
+
+        "Source": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The source entity type of a relationship type."
+        },
+
+        "Target": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The target entity type of a relationship type."
+        },
+
+        "RelationshipAnnotation": {
+          "type": "string",
+          "minLength": 1,
+          "description": "A human-readable annotation describing the relationship (e.g. 'Person likes Film')."
+        },
+
+        "PrimaryKey": {
+          "type": "array",
+          "description": "The list of property names that form the primary key for this type.",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+
+        "Properties": {
+          "type": "array",
+          "description": "The list of properties belonging to this type.",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/PropertyDefinition"
+          }
+        },
+
+        "Relationships": {
+          "type": "array",
+          "description": "The list of relationships this type participates in as source.",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/RelationshipDefinition"
+          }
+        },
+
+        "TypeReadings": {
+          "type": "array",
+          "description": "Natural-language readings for the type as a whole, expressing its role in the domain.",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+
+        "IsRelationshipType": {
+          "type": "boolean",
+          "description": "True if this type is an association or relationship type; false if it is an entity type."
+        }
+      },
+
+      "if": {
+        "properties": {
+          "IsRelationshipType": { "const": true }
+        }
+      },
+      "then": {
+        "description": "Relationship types must carry a Label and RelationshipAnnotation.",
+        "required": ["Label", "RelationshipAnnotation"]
+      },
+      "else": {
+        "description": "Entity types must carry at least one Label.",
+        "required": ["Labels"]
+      },
+
+      "additionalProperties": false
+    },
+
+    "PropertyDefinition": {
+      "type": "object",
+      "description": "A single property on an entity or relationship type.",
+      "required": ["Name", "DataType"],
+      "properties": {
+
+        "Name": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The property name."
+        },
+
+        "DataType": {
+          "type": "string",
+          "description": "The portable UMS data type for this property.",
+          "enum": [
+            "TextVariableLength",
+            "TextFixedLength",
+            "Integer",
+            "Decimal",
+            "Float",
+            "Boolean",
+            "DateTime",
+            "Date",
+            "Binary",
+            "UUID"
+          ]
+        },
+
+        "Length": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Maximum length for text properties. 0 indicates unbounded."
+        },
+
+        "Constraints": {
+          "type": "array",
+          "description": "Constraints applied to this property.",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "enum": [
+              "NOT NULL",
+              "UNIQUE",
+              "PRIMARY KEY",
+              "CHECK",
+              "DEFAULT"
+            ]
+          }
+        },
+
+        "Readings": {
+          "type": "array",
+          "description": "Natural-language ORM verbalisations for this property, expressing elementary facts.",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+
+      "additionalProperties": false
+    },
+
+    "RelationshipDefinition": {
+      "type": "object",
+      "description": "A directed relationship between two types, with foreign key mappings and readings.",
+      "required": ["Name", "Source", "Target", "From", "To", "Readings"],
+      "properties": {
+
+        "Name": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The name of this relationship."
+        },
+
+        "Source": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The type that is the source (owning side) of this relationship."
+        },
+
+        "Target": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The type that is the target of this relationship."
+        },
+
+        "From": {
+          "type": "array",
+          "description": "The property names on the source type that form the foreign key.",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+
+        "To": {
+          "type": "array",
+          "description": "The corresponding property names on the target type.",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+
+        "Readings": {
+          "type": "array",
+          "description": "Natural-language ORM verbalisations for this relationship, in both directions where applicable.",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+
+      "additionalProperties": false
+    }
+
+  }
+}
