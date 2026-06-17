@@ -6,13 +6,15 @@ Namespace UMS
     Public Class UniquenessConstraint
 
         ''' <summary>
-        ''' FK or relationship name e.g. FK_Session_Cinema, PersonLikesFilm_Person
+        ''' The unique Name of the Constraint within the Model.
+        ''' UQ_Person_LoginName 
         ''' </summary>
         Public Property Name As String
 
         ''' <summary>
-        ''' Graph label e.g. IS_AT, IS_FOR, IS_IN
-        ''' Optional — relationship types may omit the label on their FK entries
+        ''' For the Properties/Attributes/Columns of the Constraint.
+        ''' ALTER TABLE Booking
+        ''' ADD CONSTRAINT UQ_Booking_PersonFilm UNIQUE (Person_Id, Film_Id, DateTime);        
         ''' </summary>
         Public Property Properties As New List(Of String)
 

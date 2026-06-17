@@ -1,8 +1,22 @@
+Imports com.sun.corba.se.impl.oa.poa
 Imports YamlDotNet.Serialization
 Imports YamlDotNet.Serialization.NamingConventions
 
 Namespace UMS
 
+    ''' <summary>
+    ''' Example Property (that is also an array).
+    ''' 
+    ''' - Name: PhoneNumbers
+    '     DataType: TextVariableLength
+    '     IsArray: true
+    '     ArrayConstraints:
+    '       MinItems: 0
+    '       MaxItems: 10
+    '       Unique: false        # whether array elements must be distinct
+    '     Readings:
+    '       - Person has PhoneNumber
+    ''' </summary>
     Public Class PropertyDefinition
 
         ''' <summary>
@@ -21,10 +35,16 @@ Namespace UMS
         Public Property DataType As UMS.DataType
 
         ''' <summary>
-        ''' Length for TextFixedLength properties e.g. 100, 200, 1
+        ''' Length for properties with Data Types that have a Length. E.g. 100, 200, 1. E.g. TextFixedLength(100)
         ''' Null for all other data types
         ''' </summary>
         Public Property Length As Integer?
+
+        ''' <summary>
+        ''' E.g. Number of decimal places. E.g. Data Type Money(10,2) where 2 is the Precision and 10 is the length.
+        ''' Null for all other data types
+        ''' </summary>
+        Public Property Precision As Integer?
 
         ''' <summary>
         ''' Constraints e.g. [NOT NULL, UNIQUE]
@@ -32,6 +52,20 @@ Namespace UMS
         Public Property Constraints As List(Of UMS.Constraint)
 
         Public Property Readings As List(Of String)
+
+        Public Property IsArray As Boolean?
+
+        Public Property ArrayConstraints As UMS.ArrayConstraints
+
+    End Class
+
+    Public Class ArrayConstraints
+
+        Public Property MinItems As Integer?
+
+        Public Property MaxItems As Integer?
+
+        Public Property Unique As Boolean?
 
     End Class
 

@@ -32,6 +32,18 @@ Namespace UMS
         <YamlMember(Alias:="To")>
         Public Property [To] As New List(Of String)
 
+        ''' <summary>
+        ''' For Document creation, when a relationship is embedded. E.g. Cinema contains Row (all of the Rows are put in the Cinema object definition).
+        ''' </summary>
+        ''' <returns></returns>
+        Public Property Embed As Boolean?
+
+        ''' <summary>
+        ''' For Embedded (above) relationships. Is the Cardinality of the effective list (One, Many, ZeroOrMore).
+        ''' </summary>
+        ''' <returns></returns>
+        Public Property Cardinality As UMS.Cardinality?
+
         Public Property Readings As New List(Of String)
 
     End Class
