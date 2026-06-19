@@ -56,7 +56,18 @@ Public Class TypeDefinition
 
         Public Property Relationships As List(Of RelationshipDefinition)
 
-        Public Property TypeReadings As List(Of String)
+        ''' <summary>
+        ''' Fact-Based Modelling, Fact Type Readings. Populated if the Type is a Relationship Type. Set of Fact Type Readings by Language.
+        ''' </summary>
+        ''' <returns></returns>
+        Public Property FactTypeReadings As List(Of UMS.FactTypeReadings)
+
+        ''' <summary>
+        ''' Fact Based Modelling, Facts. Populated if the Type is a Relationship Type and if there are any Facts stored in the modelling tool. Set of Facts for the Relationship.
+        ''' E.g. "Part, 1, in Bin, 'H1', is stored in Warehouse, 'Sydney-01'.
+        ''' </summary>
+        ''' <returns></returns>
+        Public Property Facts As List(Of UMS.Facts)
 
         Public Property UniquenessConstraints As List(Of UMS.UniquenessConstraint)
 

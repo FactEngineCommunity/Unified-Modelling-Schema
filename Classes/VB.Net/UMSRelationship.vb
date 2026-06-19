@@ -46,6 +46,8 @@ Namespace UMS
 
         Public Property Readings As New List(Of String)
 
+        Public Property Facts As List(Of UMS.Facts)
+
     End Class
 
 End Namespace

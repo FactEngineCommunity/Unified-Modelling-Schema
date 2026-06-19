@@ -1,4 +1,3 @@
-Imports com.sun.corba.se.impl.oa.poa
 Imports YamlDotNet.Serialization
 Imports YamlDotNet.Serialization.NamingConventions
 
@@ -23,6 +22,13 @@ Namespace UMS
         ''' The property name e.g. Id, Name, CinemaId
         ''' </summary>
         Public Property Name As String
+
+        ''' <summary>
+        ''' The Fact-Based Modelling Alias/Name for the Property if there is one.
+        ''' E.g. A Property, 'FirstName', (in the database model) may have a space delimited name/alias of 'First Name' in a Fact-Based Model.
+        ''' </summary>
+        ''' <returns></returns>
+        Public Property FBMAlias As String = Nothing
 
         ''' <summary>
         ''' Optional alias / role name e.g. "Cinema Name", "Film Title"
@@ -51,7 +57,9 @@ Namespace UMS
         ''' </summary>
         Public Property Constraints As List(Of UMS.Constraint)
 
-        Public Property Readings As List(Of String)
+        Public Property FactTypeReadings As List(Of FactTypeReadings)
+
+        Public Property Facts As List(Of UMS.Facts)
 
         Public Property IsArray As Boolean?
 
