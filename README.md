@@ -116,7 +116,7 @@ The following excerpt models a `Person` entity type and a `PersonLikesFilm` rela
         - Person has First Name
         - Frst Name is of Person
     - Name: LastName
-      FactBasedName: Last NAme
+      FactBasedName: Last Name
       DataType: TextVariableLength
       Constraints:
         - NOT NULL
