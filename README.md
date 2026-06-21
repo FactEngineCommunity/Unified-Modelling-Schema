@@ -136,6 +136,11 @@ The following excerpt models a `Person` entity type and a `PersonLikesFilm` rela
       Readings:
         - Person (as Child) has mother-Person (as Mother)
         - mother-Person (as Mother) is mother of Person (as Child)
+  UniquenessConstraints:
+    - Name: Person_UC1
+      Properties:
+        - FirstName
+        - LastName
   IsRelationshipType: false
 
 - Type: PersonLikesFilm
