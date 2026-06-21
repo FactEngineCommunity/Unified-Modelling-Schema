@@ -107,6 +107,22 @@ The following excerpt models a `Person` entity type and a `PersonLikesFilm` rela
       Readings:
         - Person_Id is of Person
         - Person has Person_Id
+    - Name: FirstName
+      FactBasedName: First Name
+      DataType: TextVariableLength
+      Constraints:
+        - NOT NULL
+      Readings:
+        - Person has First Name
+        - Frst Name is of Person
+    - Name: LastName
+      FactBasedName: Last NAme
+      DataType: TextVariableLength
+      Constraints:
+        - NOT NULL
+      Readings:
+        - Person has Last Name
+        - Last Name is of Person
     - Name: LoginName
       DataType: TextVariableLength
       Length: 100
@@ -115,6 +131,11 @@ The following excerpt models a `Person` entity type and a `PersonLikesFilm` rela
         - UNIQUE
       Readings:
         - Person has LoginName
+    - Name: MotherPerson_Id
+      DataType: Integer
+      Readings:
+        - Person (as Child) has mother-Person (as Mother)
+        - mother-Person (as Mother) is mother of Person (as Child)
   IsRelationshipType: false
 
 - Type: PersonLikesFilm
