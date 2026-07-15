@@ -1,0 +1,34 @@
+---
+title: Unified Modelling Schema
+description: A portable, semantic model for relational, graph, document, and multi-model data.
+template: splash
+hero:
+  tagline: Model structure and meaning once. Use it across data platforms.
+  actions:
+    - text: Get started
+      link: /guides/getting-started/
+      icon: right-arrow
+    - text: Browse the reference
+      link: /reference/ums-schema/
+      icon: open-book
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+## One model, many implementations
+
+<CardGrid stagger>
+	<Card title="Start with the model" icon="pencil">
+		Define types, portable properties, keys, constraints, relationships, and their natural-language readings in one YAML document.
+	</Card>
+	<Card title="Keep the semantics" icon="document">
+		Fact type readings make the intended meaning explicit for people, generated documentation, and AI-assisted work.
+	</Card>
+	<Card title="Choose your target" icon="seti:database">
+		Use the same UMS model when designing relational tables, property graphs, document structures, or a mixed estate.
+	</Card>
+	<Card title="Find your paradigm" icon="open-book">
+		The reference explains how UMS concepts translate for relational, graph, document, and multi-model practitioners.
+	</Card>
+</CardGrid>
