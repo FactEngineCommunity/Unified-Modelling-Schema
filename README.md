@@ -13,6 +13,10 @@ UMS is designed to serve as the canonical representation of a model throughout i
 
 \---
 
+# Documentation
+
+Read the docs at: [Fact-Based Modelling MetaModel](https://factenginecommunity.github.io/Unified-Modelling-Schema/)
+
 ## Key Features
 
 **Storage-agnostic.** A UMS document makes no assumptions about where the data lives. The same schema can target a relational database, a property graph, a document store, a wide-column store, or a vector database without retranslating the semantics at each step.
