@@ -106,21 +106,58 @@ The following excerpt models a `Person` entity type and a `PersonLikesFilm` rela
       DataType: Integer
       Constraints:
         - NOT NULL
+<<<<<<< HEAD
       FactTypeReadings:
         - Language: English
           Readings:
             - Person_Id is of Person
             - Person has Person_Id
+=======
+      Readings:
+        - Person_Id is of Person
+        - Person has Person_Id
+    - Name: FirstName
+      FactBasedName: First Name
+      DataType: TextVariableLength
+      Constraints:
+        - NOT NULL
+      Readings:
+        - Person has First Name
+        - Frst Name is of Person
+    - Name: LastName
+      FactBasedName: Last Name
+      DataType: TextVariableLength
+      Constraints:
+        - NOT NULL
+      Readings:
+        - Person has Last Name
+        - Last Name is of Person
+>>>>>>> 665d06a85da15510f2541a438ad86d852b8eadc5
     - Name: LoginName
       DataType: TextVariableLength
       Length: 100
       Constraints:
         - NOT NULL
         - UNIQUE
+<<<<<<< HEAD
       FactTypeReadings:
         - Language: English
           Readings:
             - Person has LoginName
+=======
+      Readings:
+        - Person has LoginName
+    - Name: MotherPerson_Id
+      DataType: Integer
+      Readings:
+        - Person (as Child) has mother-Person (as Mother)
+        - mother-Person (as Mother) is mother of Person (as Child)
+  UniquenessConstraints:
+    - Name: Person_UC1
+      Properties:
+        - FirstName
+        - LastName
+>>>>>>> 665d06a85da15510f2541a438ad86d852b8eadc5
   IsRelationshipType: false
 
 - Type: PersonLikesFilm
