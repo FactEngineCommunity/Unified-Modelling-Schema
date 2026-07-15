@@ -3,8 +3,11 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
 // https://astro.build/config
+// https://astro.build/config
 export default defineConfig({
-	integrations: [
+  site: 'https://factenginecommunity.github.io',
+  base: '/Unified-Modelling-Schema',
+  integrations: [
 		starlight({
 			title: 'Unified Modelling Schema',
 			description: 'A portable, semantic schema for relational, graph, document, and multi-model data.',
