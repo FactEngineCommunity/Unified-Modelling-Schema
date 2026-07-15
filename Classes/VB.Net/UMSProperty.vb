@@ -24,11 +24,11 @@ Namespace UMS
         Public Property Name As String
 
         ''' <summary>
-        ''' The Fact-Based Modelling Alias/Name for the Property if there is one.
+        ''' The Fact-Based (Modelling) Alias/Name for the Property if there is one.
         ''' E.g. A Property, 'FirstName', (in the database model) may have a space delimited name/alias of 'First Name' in a Fact-Based Model.
         ''' </summary>
         ''' <returns></returns>
-        Public Property FBMAlias As String = Nothing
+        Public Property FactBasedName As String = Nothing
 
         ''' <summary>
         ''' Optional alias / role name e.g. "Cinema Name", "Film Title"

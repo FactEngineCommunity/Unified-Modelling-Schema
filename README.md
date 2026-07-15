@@ -51,7 +51,7 @@ A UMS document is a YAML list of typed objects. Each object may contain the foll
 |`Relationships`|List of relationship definitions (see below)|
 |`IsRelationshipType`|`true` if this type is an association/relationship type|
 |`RelationshipAnnotation`|Human-readable description of the relationship|
-|`TypeReadings`|Natural-language readings for the type as a whole|
+|`FactTypeReadings`|Natural-language readings for the type, grouped by language|
 |`Label`|Short relationship label (e.g. for graph edge labelling)|
 
 ### Property Definition
@@ -63,9 +63,11 @@ A UMS document is a YAML list of typed objects. Each object may contain the foll
   Constraints:
     - NOT NULL
     - UNIQUE
-  Readings:
-    - Person has LoginName
-    - LoginName is of Person
+  FactTypeReadings:
+    - Language: English
+      Readings:
+        - Person has LoginName
+        - LoginName is of Person
 ```
 
 ### Relationship Definition
@@ -104,17 +106,21 @@ The following excerpt models a `Person` entity type and a `PersonLikesFilm` rela
       DataType: Integer
       Constraints:
         - NOT NULL
-      Readings:
-        - Person_Id is of Person
-        - Person has Person_Id
+      FactTypeReadings:
+        - Language: English
+          Readings:
+            - Person_Id is of Person
+            - Person has Person_Id
     - Name: LoginName
       DataType: TextVariableLength
       Length: 100
       Constraints:
         - NOT NULL
         - UNIQUE
-      Readings:
-        - Person has LoginName
+      FactTypeReadings:
+        - Language: English
+          Readings:
+            - Person has LoginName
   IsRelationshipType: false
 
 - Type: PersonLikesFilm
@@ -147,8 +153,10 @@ The following excerpt models a `Person` entity type and a `PersonLikesFilm` rela
       Readings:
         - PersonLikesFilm involves Film
         - Film is involved in PersonLikesFilm
-  TypeReadings:
-    - Person likes Film
+  FactTypeReadings:
+    - Language: English
+      Readings:
+        - Person likes Film
   IsRelationshipType: true
 ```
 
