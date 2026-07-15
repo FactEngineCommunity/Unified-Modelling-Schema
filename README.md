@@ -106,47 +106,41 @@ The following excerpt models a `Person` entity type and a `PersonLikesFilm` rela
       DataType: Integer
       Constraints:
         - NOT NULL
-<<<<<<< HEAD
       FactTypeReadings:
         - Language: English
           Readings:
             - Person_Id is of Person
             - Person has Person_Id
-=======
-      Readings:
-        - Person_Id is of Person
-        - Person has Person_Id
     - Name: FirstName
       FactBasedName: First Name
       DataType: TextVariableLength
       Constraints:
         - NOT NULL
-      Readings:
-        - Person has First Name
-        - Frst Name is of Person
+      FactTypeReadings:
+        - Language: English
+          Readings:
+            - Person has First Name
+            - Frst Name is of Person
     - Name: LastName
       FactBasedName: Last Name
       DataType: TextVariableLength
       Constraints:
         - NOT NULL
-      Readings:
-        - Person has Last Name
-        - Last Name is of Person
->>>>>>> 665d06a85da15510f2541a438ad86d852b8eadc5
+      FactTypeReadings:
+        - Language: English
+          Readings:
+            - Person has Last Name
+            - Last Name is of Person
     - Name: LoginName
       DataType: TextVariableLength
       Length: 100
       Constraints:
         - NOT NULL
         - UNIQUE
-<<<<<<< HEAD
       FactTypeReadings:
         - Language: English
           Readings:
             - Person has LoginName
-=======
-      Readings:
-        - Person has LoginName
     - Name: MotherPerson_Id
       DataType: Integer
       Readings:
@@ -157,7 +151,6 @@ The following excerpt models a `Person` entity type and a `PersonLikesFilm` rela
       Properties:
         - FirstName
         - LastName
->>>>>>> 665d06a85da15510f2541a438ad86d852b8eadc5
   IsRelationshipType: false
 
 - Type: PersonLikesFilm
@@ -177,9 +170,11 @@ The following excerpt models a `Person` entity type and a `PersonLikesFilm` rela
         - Person_Id
       To:
         - Person_Id
-      Readings:
-        - PersonLikesFilm involves Person
-        - Person is involved in PersonLikesFilm
+      FactTypeReadings:
+        - Language: English
+          Readings:
+            - PersonLikesFilm involves Person
+            - Person is involved in PersonLikesFilm
     - Name: FilmPersonLikesFilm
       Source: PersonLikesFilm
       Target: Film
@@ -187,9 +182,11 @@ The following excerpt models a `Person` entity type and a `PersonLikesFilm` rela
         - Film_Id
       To:
         - Film_Id
-      Readings:
-        - PersonLikesFilm involves Film
-        - Film is involved in PersonLikesFilm
+      FactTypeReadings:
+        - Language: English
+          Readings:
+            - PersonLikesFilm involves Film
+            - Film is involved in PersonLikesFilm
   FactTypeReadings:
     - Language: English
       Readings:
