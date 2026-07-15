@@ -9,7 +9,7 @@ Most schema formats describe structure. UMS describes structure *and* semantics.
 
 The Unified Modelling Schema is a YAML-based format for representing a complete data model — entity types, relationship types, properties, constraints, primary keys, and natural-language predicates — in a single, human-readable document that is independent of any storage technology.
 
-UMS is designed to serve as the canonical representation of a model throughout its lifecycle: from initial design through to code generation, graph schema, relational DDL, documentation, and AI-assisted reasoning.
+UMS is designed to serve as the canonical representation of a model throughout its lifecycle: from initial design through to code generation, graph schema, relational DDL, documentation, and AI-assisted reasoning.  
 
 \---
 
