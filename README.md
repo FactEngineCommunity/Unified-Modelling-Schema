@@ -15,7 +15,7 @@ UMS is designed to serve as the canonical representation of a model throughout i
 
 # Documentation
 
-Read the docs at: [Fact-Based Modelling MetaModel](https://factenginecommunity.github.io/Unified-Modelling-Schema/)
+Read the docs at: [Unified Modelling Schema](https://factenginecommunity.github.io/Unified-Modelling-Schema/)
 
 ## Key Features
 
