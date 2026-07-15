@@ -1,82 +1,186 @@
+Name: CinemaBookings
+UMSVersionNr: 0.1
+ModelVersionNr: 
+ModelElement:
 - Type: Person
   Labels:
   - Person
+  Label: 
+  Source: 
+  Target: 
+  RelationshipAnnotation: 
   PrimaryKey:
   - Person_Id
   Properties:
   - Name: LoginName
+    FactBasedName: 
+    Alias: 
     DataType: TextVariableLength
     Length: 100
+    Precision: 
     Constraints:
-    - NOT NULL
-    - UNIQUE
-    Readings:
-    - Person has login-LoginName
+    - NotNull
+    - Unique
+    FactTypeReadings:
+    - Language: Not Defined
+      Readings:
+      - Person has login-LoginName
+    Facts: 
+    IsArray: 
+    ArrayConstraints: 
   - Name: Person_Id
+    FactBasedName: 
+    Alias: 
     DataType: Integer
+    Length: 
+    Precision: 
     Constraints:
-    - NOT NULL
-    Readings:
-    - Person_Id is of Person
-    - Person has Person_Id
+    - NotNull
+    FactTypeReadings:
+    - Language: Not Defined
+      Readings:
+      - Person_Id is of Person
+      - Person has Person_Id
+    Facts: 
+    IsArray: 
+    ArrayConstraints: 
   - Name: DateOfBirth
+    FactBasedName: 
+    Alias: 
     DataType: TextVariableLength
-    Readings:
-    - Person has DateOfBirth
+    Length: 
+    Precision: 
+    Constraints: 
+    FactTypeReadings:
+    - Language: Not Defined
+      Readings:
+      - Person has DateOfBirth
+    Facts: 
+    IsArray: 
+    ArrayConstraints: 
   - Name: Age
+    FactBasedName: 
+    Alias: 
     DataType: TextVariableLength
+    Length: 
+    Precision: 
     Constraints:
-    - NOT NULL
-    Readings:
-    - Person has Age
+    - NotNull
+    FactTypeReadings:
+    - Language: Not Defined
+      Readings:
+      - Person has Age
+    Facts: 
+    IsArray: 
+    ArrayConstraints: 
   - Name: FirstName
+    FactBasedName: First Name
+    Alias: 
     DataType: TextVariableLength
     Length: 0
-    Readings:
-    - Person has First Name
-    - First Name is of Person
+    Precision: 
+    Constraints: 
+    FactTypeReadings:
+    - Language: Not Defined
+      Readings:
+      - Person has First Name
+      - First Name is of Person
+    Facts:
+    - Language: Not Defined
+      Facts:
+      - Person, 1, has First Name, 'Peter'.
+    IsArray: 
+    ArrayConstraints: 
   - Name: LastName
+    FactBasedName: Last Name
+    Alias: 
     DataType: TextVariableLength
     Length: 0
-    Readings:
-    - Person has Last Name
-    - Last Name is of Person
+    Precision: 
+    Constraints: 
+    FactTypeReadings:
+    - Language: Not Defined
+      Readings:
+      - Person has Last Name
+      - Last Name is of Person
+    Facts:
+    - Language: Not Defined
+      Facts:
+      - Person, 1, has Last Name, 'Smith'.
+    IsArray: 
+    ArrayConstraints: 
+  Relationships: 
+  FactTypeReadings: 
+  Facts: 
+  UniquenessConstraints:
+  - Name: Person_UC1
+    Properties:
+    - FirstName
+    - LastName
   IsRelationshipType: false
 - Type: Row
   Labels:
   - Row
+  Label: 
+  Source: 
+  Target: 
+  RelationshipAnnotation: 
   PrimaryKey:
   - RowNr
   - Cinema_Id
   Properties:
   - Name: Cinema_Id
+    FactBasedName: 
+    Alias: 
     DataType: Integer
+    Length: 
+    Precision: 
     Constraints:
-    - NOT NULL
-    Readings:
-    - Cinema contains Row
-    - Row is in Cinema
+    - NotNull
+    FactTypeReadings:
+    - Language: Not Defined
+      Readings:
+      - Cinema contains Row
+      - Row is in Cinema
+    Facts: 
+    IsArray: 
+    ArrayConstraints: 
   - Name: RowNr
+    FactBasedName: 
+    Alias: 
     DataType: TextVariableLength
+    Length: 
+    Precision: 
     Constraints:
-    - NOT NULL
-    Readings:
-    - Row has RowNr
+    - NotNull
+    FactTypeReadings:
+    - Language: Not Defined
+      Readings:
+      - Row has RowNr
+    Facts: 
+    IsArray: 
+    ArrayConstraints: 
   Relationships:
   - Name: IS_IN
+    Label: 
     Source: Row
     Target: Cinema
     From:
     - Cinema_Id
     To:
     - Cinema_Id
-    Embed: true
-    Cardinality: Many
+    Embed: 
+    Cardinality: 
     Readings:
     - Cinema contains Row
     - Row is in Cinema
+    Facts: 
+  FactTypeReadings: 
+  Facts: 
+  UniquenessConstraints: 
   IsRelationshipType: false
 - Type: PersonLikesFilm
+  Labels: 
   Label: LIKES
   Source: Person
   Target: Film
@@ -86,64 +190,130 @@
   - Person_Id
   Properties:
   - Name: Rating
+    FactBasedName: 
+    Alias: 
     DataType: TextVariableLength
+    Length: 
+    Precision: 
+    Constraints: 
+    FactTypeReadings: 
+    Facts: 
+    IsArray: 
+    ArrayConstraints: 
   - Name: Film_Id
+    FactBasedName: 
+    Alias: 
     DataType: Integer
+    Length: 
+    Precision: 
     Constraints:
-    - NOT NULL
+    - NotNull
+    FactTypeReadings: 
+    Facts: 
+    IsArray: 
+    ArrayConstraints: 
   - Name: Person_Id
+    FactBasedName: 
+    Alias: 
     DataType: Integer
+    Length: 
+    Precision: 
     Constraints:
-    - NOT NULL
+    - NotNull
+    FactTypeReadings: 
+    Facts: 
+    IsArray: 
+    ArrayConstraints: 
   Relationships:
   - Name: FilmPersonLikesFilm
+    Label: 
     Source: PersonLikesFilm
     Target: Film
     From:
     - Film_Id
     To:
     - Film_Id
+    Embed: 
+    Cardinality: 
     Readings:
     - PersonLikesFilm involves Film
     - Film is involved in PersonLikesFilm
+    Facts: 
   - Name: PersonPersonLikesFilm
+    Label: 
     Source: PersonLikesFilm
     Target: Person
     From:
     - Person_Id
     To:
     - Person_Id
+    Embed: 
+    Cardinality: 
     Readings:
     - PersonLikesFilm involves Person
     - Person is involved in PersonLikesFilm
-  TypeReadings:
-  - Person likes Film
+    Facts: 
+  FactTypeReadings:
+  - Language: Not Defined
+    Readings:
+    - Person likes Film
+  Facts: 
+  UniquenessConstraints: 
   IsRelationshipType: true
 - Type: Cinema
   Labels:
   - Cinema
+  Label: 
+  Source: 
+  Target: 
+  RelationshipAnnotation: 
   PrimaryKey:
   - Cinema_Id
   Properties:
   - Name: CinemaName
+    FactBasedName: 
+    Alias: 
     DataType: TextVariableLength
     Length: 100
+    Precision: 
     Constraints:
-    - NOT NULL
-    - UNIQUE
-    Readings:
-    - Cinema has CinemaName
+    - NotNull
+    - Unique
+    FactTypeReadings:
+    - Language: Not Defined
+      Readings:
+      - Cinema has CinemaName
+    Facts: 
+    IsArray: 
+    ArrayConstraints: 
   - Name: Cinema_Id
+    FactBasedName: 
+    Alias: 
     DataType: Integer
+    Length: 
+    Precision: 
     Constraints:
-    - NOT NULL
-    Readings:
-    - Cinema_Id is of Cinema
-    - Cinema has Cinema_Id
+    - NotNull
+    FactTypeReadings:
+    - Language: Not Defined
+      Readings:
+      - Cinema_Id is of Cinema
+      - Cinema has Cinema_Id
+    Facts: 
+    IsArray: 
+    ArrayConstraints: 
+  Relationships: 
+  FactTypeReadings: 
+  Facts: 
+  UniquenessConstraints: 
   IsRelationshipType: false
 - Type: Booking
   Labels:
   - Booking
+  Label: 
+  Source: 
+  Target: 
+  RelationshipAnnotation: 
   PrimaryKey:
   - Person_Id
   - DateTime
@@ -151,37 +321,82 @@
   - Cinema_Id
   Properties:
   - Name: Cinema_Id
+    FactBasedName: 
+    Alias: 
     DataType: Integer
+    Length: 
+    Precision: 
     Constraints:
-    - NOT NULL
+    - NotNull
+    FactTypeReadings: 
+    Facts: 
+    IsArray: 
+    ArrayConstraints: 
   - Name: SeatCount
+    FactBasedName: 
+    Alias: 
     DataType: TextVariableLength
+    Length: 
+    Precision: 
     Constraints:
-    - NOT NULL
+    - NotNull
+    FactTypeReadings: 
+    Facts: 
+    IsArray: 
+    ArrayConstraints: 
   - Name: DateTime
+    FactBasedName: 
+    Alias: 
     DataType: TextVariableLength
+    Length: 
+    Precision: 
     Constraints:
-    - NOT NULL
+    - NotNull
+    FactTypeReadings: 
+    Facts: 
+    IsArray: 
+    ArrayConstraints: 
   - Name: Film_Id
+    FactBasedName: 
+    Alias: 
     DataType: Integer
+    Length: 
+    Precision: 
     Constraints:
-    - NOT NULL
+    - NotNull
+    FactTypeReadings: 
+    Facts: 
+    IsArray: 
+    ArrayConstraints: 
   - Name: Person_Id
+    FactBasedName: 
+    Alias: 
     DataType: Integer
+    Length: 
+    Precision: 
     Constraints:
-    - NOT NULL
+    - NotNull
+    FactTypeReadings: 
+    Facts: 
+    IsArray: 
+    ArrayConstraints: 
   Relationships:
   - Name: IS_FOR
+    Label: 
     Source: Booking
     Target: Person
     From:
     - Person_Id
     To:
     - Person_Id
+    Embed: 
+    Cardinality: 
     Readings:
     - Booking is for Person
     - Person made Booking
+    Facts: 
   - Name: IS_FOR
+    Label: 
     Source: Booking
     Target: Session
     From:
@@ -192,198 +407,435 @@
     - Film_Id
     - DateTime
     - Cinema_Id
+    Embed: 
+    Cardinality: 
     Readings:
     - Booking is for Session
     - Session has Booking
-  TypeReadings:
-  - Person booked Session
+    Facts: 
+  FactTypeReadings:
+  - Language: Not Defined
+    Readings:
+    - Person booked Session
+  Facts: 
+  UniquenessConstraints: 
   IsRelationshipType: false
 - Type: Teenager
   Labels:
   - Teenager
+  Label: 
+  Source: 
+  Target: 
+  RelationshipAnnotation: 
+  PrimaryKey:
+  - FirstName
+  - LastName
   Properties:
   - Name: FirstName
+    FactBasedName: First Name
+    Alias: 
     DataType: TextVariableLength
     Length: 0
-    Readings:
-    - Person has First Name
-    - First Name is of Person
+    Precision: 
+    Constraints: 
+    FactTypeReadings:
+    - Language: Not Defined
+      Readings:
+      - Person has First Name
+      - First Name is of Person
+    Facts:
+    - Language: Not Defined
+      Facts:
+      - Person, 1, has First Name, 'Peter'.
+    IsArray: 
+    ArrayConstraints: 
   - Name: LastName
+    FactBasedName: Last Name
+    Alias: 
     DataType: TextVariableLength
     Length: 0
-    Readings:
-    - Person has Last Name
-    - Last Name is of Person
+    Precision: 
+    Constraints: 
+    FactTypeReadings:
+    - Language: Not Defined
+      Readings:
+      - Person has Last Name
+      - Last Name is of Person
+    Facts:
+    - Language: Not Defined
+      Facts:
+      - Person, 1, has Last Name, 'Smith'.
+    IsArray: 
+    ArrayConstraints: 
+  Relationships: 
+  FactTypeReadings: 
+  Facts: 
+  UniquenessConstraints: 
   IsRelationshipType: false
 - Type: Section
   Labels:
   - Section
+  Label: 
+  Source: 
+  Target: 
+  RelationshipAnnotation: 
   PrimaryKey:
   - Section_Name
   Properties:
   - Name: Section_Name
+    FactBasedName: 
+    Alias: 
     DataType: TextVariableLength
     Length: 100
+    Precision: 
     Constraints:
-    - NOT NULL
-    Readings:
-    - Section has Section_Name
-    - Section_Name is of Section
+    - NotNull
+    FactTypeReadings:
+    - Language: Not Defined
+      Readings:
+      - Section has Section_Name
+      - Section_Name is of Section
+    Facts: 
+    IsArray: 
+    ArrayConstraints: 
+  Relationships: 
+  FactTypeReadings: 
+  Facts: 
+  UniquenessConstraints: 
   IsRelationshipType: false
 - Type: Child
   Labels:
   - Child
+  Label: 
+  Source: 
+  Target: 
+  RelationshipAnnotation: 
+  PrimaryKey:
+  - FirstName
+  - LastName
   Properties:
   - Name: FirstName
+    FactBasedName: First Name
+    Alias: 
     DataType: TextVariableLength
     Length: 0
-    Readings:
-    - Person has First Name
-    - First Name is of Person
+    Precision: 
+    Constraints: 
+    FactTypeReadings:
+    - Language: Not Defined
+      Readings:
+      - Person has First Name
+      - First Name is of Person
+    Facts:
+    - Language: Not Defined
+      Facts:
+      - Person, 1, has First Name, 'Peter'.
+    IsArray: 
+    ArrayConstraints: 
   - Name: LastName
+    FactBasedName: Last Name
+    Alias: 
     DataType: TextVariableLength
     Length: 0
-    Readings:
-    - Person has Last Name
-    - Last Name is of Person
+    Precision: 
+    Constraints: 
+    FactTypeReadings:
+    - Language: Not Defined
+      Readings:
+      - Person has Last Name
+      - Last Name is of Person
+    Facts:
+    - Language: Not Defined
+      Facts:
+      - Person, 1, has Last Name, 'Smith'.
+    IsArray: 
+    ArrayConstraints: 
+  Relationships: 
+  FactTypeReadings: 
+  Facts: 
+  UniquenessConstraints: 
   IsRelationshipType: false
 - Type: Film
   Labels:
   - Film
+  Label: 
+  Source: 
+  Target: 
+  RelationshipAnnotation: 
   PrimaryKey:
   - Film_Id
   Properties:
   - Name: Film_Id
+    FactBasedName: 
+    Alias: 
     DataType: Integer
+    Length: 
+    Precision: 
     Constraints:
-    - NOT NULL
-    Readings:
-    - Film_Id is of Film
-    - Film has Film_Id
+    - NotNull
+    FactTypeReadings:
+    - Language: Not Defined
+      Readings:
+      - Film_Id is of Film
+      - Film has Film_Id
+    Facts: 
+    IsArray: 
+    ArrayConstraints: 
   - Name: Name
+    FactBasedName: Film Name
+    Alias: 
     DataType: TextVariableLength
     Length: 0
+    Precision: 
     Constraints:
-    - NOT NULL
-    - UNIQUE
-    Readings:
-    - Film has Film Name
+    - NotNull
+    - Unique
+    FactTypeReadings:
+    - Language: Not Defined
+      Readings:
+      - Film has Film Name
+      - Film Name is for Film
+    Facts: 
+    IsArray: 
+    ArrayConstraints: 
+  Relationships: 
+  FactTypeReadings: 
+  Facts: 
+  UniquenessConstraints: 
   IsRelationshipType: false
 - Type: Adult
   Labels:
   - Adult
+  Label: 
+  Source: 
+  Target: 
+  RelationshipAnnotation: 
+  PrimaryKey:
+  - FirstName
+  - LastName
   Properties:
   - Name: FirstName
+    FactBasedName: First Name
+    Alias: 
     DataType: TextVariableLength
     Length: 0
-    Readings:
-    - Person has First Name
-    - First Name is of Person
+    Precision: 
+    Constraints: 
+    FactTypeReadings:
+    - Language: Not Defined
+      Readings:
+      - Person has First Name
+      - First Name is of Person
+    Facts:
+    - Language: Not Defined
+      Facts:
+      - Person, 1, has First Name, 'Peter'.
+    IsArray: 
+    ArrayConstraints: 
   - Name: LastName
+    FactBasedName: Last Name
+    Alias: 
     DataType: TextVariableLength
     Length: 0
-    Readings:
-    - Person has Last Name
-    - Last Name is of Person
+    Precision: 
+    Constraints: 
+    FactTypeReadings:
+    - Language: Not Defined
+      Readings:
+      - Person has Last Name
+      - Last Name is of Person
+    Facts:
+    - Language: Not Defined
+      Facts:
+      - Person, 1, has Last Name, 'Smith'.
+    IsArray: 
+    ArrayConstraints: 
+  Relationships: 
+  FactTypeReadings: 
+  Facts: 
+  UniquenessConstraints: 
   IsRelationshipType: false
 - Type: Session
   Labels:
   - Session
+  Label: 
+  Source: 
+  Target: 
+  RelationshipAnnotation: 
   PrimaryKey:
   - DateTime
   - Film_Id
   - Cinema_Id
   Properties:
   - Name: Cinema_Id
+    FactBasedName: 
+    Alias: 
     DataType: Integer
+    Length: 
+    Precision: 
     Constraints:
-    - NOT NULL
+    - NotNull
+    FactTypeReadings: 
+    Facts: 
+    IsArray: 
+    ArrayConstraints: 
   - Name: DateTime
+    FactBasedName: 
+    Alias: 
     DataType: TextVariableLength
+    Length: 
+    Precision: 
     Constraints:
-    - NOT NULL
+    - NotNull
+    FactTypeReadings: 
+    Facts: 
+    IsArray: 
+    ArrayConstraints: 
   - Name: Film_Id
+    FactBasedName: 
+    Alias: 
     DataType: Integer
+    Length: 
+    Precision: 
     Constraints:
-    - NOT NULL
+    - NotNull
+    FactTypeReadings: 
+    Facts: 
+    IsArray: 
+    ArrayConstraints: 
   Relationships:
   - Name: IS_AT
+    Label: 
     Source: Session
     Target: Cinema
     From:
     - Cinema_Id
     To:
     - Cinema_Id
+    Embed: 
+    Cardinality: 
     Readings:
     - Cinema hosts Session
     - Session is at Cinema
+    Facts: 
   - Name: IS_FOR
+    Label: 
     Source: Session
     Target: Film
     From:
     - Film_Id
     To:
     - Film_Id
+    Embed: 
+    Cardinality: 
     Readings:
     - Film is shown in Session
     - Session is for Film
     - Session is showing Film
-  TypeReadings:
-  - Film is showing on DateTime at Cinema
-  - Cinema is showing Film on DateTime
-  - DateTime has Film showing at Cinema
-  - Cinema on DateTime is showing Film
+    Facts: 
+  FactTypeReadings:
+  - Language: Not Defined
+    Readings:
+    - Film is showing on DateTime at Cinema
+    - Cinema is showing Film on DateTime
+    - DateTime has Film showing at Cinema
+    - Cinema on DateTime is showing Film
+  Facts: 
+  UniquenessConstraints: 
   IsRelationshipType: false
 - Type: Seat
   Labels:
   - Seat
+  Label: 
+  Source: 
+  Target: 
+  RelationshipAnnotation: 
   PrimaryKey:
   - Cinema_Id
   - Letter
   - RowNr
   Properties:
   - Name: Cinema_Id
+    FactBasedName: 
+    Alias: 
     DataType: Integer
+    Length: 
+    Precision: 
     Constraints:
-    - NOT NULL
-    Readings:
-    - Seat is in Row
-    - Row contains Seat
+    - NotNull
+    FactTypeReadings:
+    - Language: Not Defined
+      Readings:
+      - Seat is in Row
+      - Row contains Seat
+    Facts: 
+    IsArray: 
+    ArrayConstraints: 
   - Name: RowNr
+    FactBasedName: 
+    Alias: 
     DataType: TextVariableLength
+    Length: 
+    Precision: 
     Constraints:
-    - NOT NULL
-    Readings:
-    - Seat is in Row
-    - Row contains Seat
+    - NotNull
+    FactTypeReadings:
+    - Language: Not Defined
+      Readings:
+      - Seat is in Row
+      - Row contains Seat
+    Facts: 
+    IsArray: 
+    ArrayConstraints: 
   - Name: Letter
+    FactBasedName: 
+    Alias: 
     DataType: TextVariableLength
     Length: 1
+    Precision: 
     Constraints:
-    - NOT NULL
-    Readings:
-    - Seat has Letter
-    - Letter is for Seat
+    - NotNull
+    FactTypeReadings:
+    - Language: Not Defined
+      Readings:
+      - Seat has Letter
+      - Letter is for Seat
+    Facts: 
+    IsArray: 
+    ArrayConstraints: 
   - Name: Section_Name
+    FactBasedName: 
+    Alias: 
     DataType: TextVariableLength
     Length: 100
+    Precision: 
     Constraints:
-    - NOT NULL
-    Readings:
-    - Seat is in Section
-    - Section has Seat
+    - NotNull
+    FactTypeReadings:
+    - Language: Not Defined
+      Readings:
+      - Seat is in Section
+      - Section has Seat
+    Facts: 
+    IsArray: 
+    ArrayConstraints: 
   Relationships:
   - Name: IS_IN
+    Label: 
     Source: Seat
     Target: Section
     From:
     - Section_Name
     To:
     - Section_Name
+    Embed: 
+    Cardinality: 
     Readings:
     - Seat is in Section
     - Section has Seat
+    Facts: 
   - Name: IS_IN
+    Label: 
     Source: Seat
     Target: Row
     From:
@@ -392,13 +844,18 @@
     To:
     - Cinema_Id
     - RowNr
-    Embed: true
-    Cardinality: Many
+    Embed: 
+    Cardinality: 
     Readings:
     - Seat is in Row
     - Row contains Seat
+    Facts: 
+  FactTypeReadings: 
+  Facts: 
+  UniquenessConstraints: 
   IsRelationshipType: false
 - Type: BookingHasSeat
+  Labels: 
   Label: HAS
   Source: Booking
   Target: Seat
@@ -413,30 +870,89 @@
   - Letter
   Properties:
   - Name: PersonId
+    FactBasedName: Person_Id
+    Alias: 
     DataType: Integer
+    Length: 
+    Precision: 
     Constraints:
-    - NOT NULL
+    - NotNull
+    FactTypeReadings: 
+    Facts: 
+    IsArray: 
+    ArrayConstraints: 
   - Name: FilmId
+    FactBasedName: Film_Id
+    Alias: 
     DataType: Integer
+    Length: 
+    Precision: 
     Constraints:
-    - NOT NULL
+    - NotNull
+    FactTypeReadings: 
+    Facts: 
+    IsArray: 
+    ArrayConstraints: 
   - Name: DateTime
+    FactBasedName: 
+    Alias: 
     DataType: TextVariableLength
+    Length: 
+    Precision: 
     Constraints:
-    - NOT NULL
+    - NotNull
+    FactTypeReadings: 
+    Facts: 
+    IsArray: 
+    ArrayConstraints: 
   - Name: CinemaId
+    FactBasedName: Cinema_Id
+    Alias: 
     DataType: Integer
+    Length: 
+    Precision: 
     Constraints:
-    - NOT NULL
+    - NotNull
+    FactTypeReadings: 
+    Facts: 
+    IsArray: 
+    ArrayConstraints: 
   - Name: RowNr
+    FactBasedName: 
+    Alias: 
     DataType: TextVariableLength
+    Length: 
+    Precision: 
+    Constraints: 
+    FactTypeReadings: 
+    Facts: 
+    IsArray: 
+    ArrayConstraints: 
   - Name: Cinema_Id
+    FactBasedName: 
+    Alias: 
     DataType: Integer
+    Length: 
+    Precision: 
+    Constraints: 
+    FactTypeReadings: 
+    Facts: 
+    IsArray: 
+    ArrayConstraints: 
   - Name: Letter
+    FactBasedName: 
+    Alias: 
     DataType: TextVariableLength
     Length: 1
+    Precision: 
+    Constraints: 
+    FactTypeReadings: 
+    Facts: 
+    IsArray: 
+    ArrayConstraints: 
   Relationships:
   - Name: BookingBookingHasSeat
+    Label: 
     Source: BookingHasSeat
     Target: Booking
     From:
@@ -449,10 +965,14 @@
     - DateTime
     - Film_Id
     - Person_Id
+    Embed: 
+    Cardinality: 
     Readings:
     - BookingHasSeat involves Booking
     - Booking is involved in BookingHasSeat
+    Facts: 
   - Name: SeatBookingHasSeat
+    Label: 
     Source: BookingHasSeat
     Target: Seat
     From:
@@ -463,10 +983,17 @@
     - Cinema_Id
     - RowNr
     - Letter
+    Embed: 
+    Cardinality: 
     Readings:
     - BookingHasSeat involves Seat
     - Seat is involved in BookingHasSeat
-  TypeReadings:
-  - Booking has Seat
-  - Seat is of Booking
+    Facts: 
+  FactTypeReadings:
+  - Language: Not Defined
+    Readings:
+    - Booking has Seat
+    - Seat is of Booking
+  Facts: 
+  UniquenessConstraints: 
   IsRelationshipType: true
