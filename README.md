@@ -13,9 +13,11 @@ UMS is designed to serve as the canonical representation of a model throughout i
 
 \---
 
-# Documentation
+## Documentation
 
 Read the docs at: [Unified Modelling Schema](https://factenginecommunity.github.io/Unified-Modelling-Schema/)
+
+![UMS Serialisation Classes](Model/Unified-Modelling-Schema-Classes.png)
 
 ## Key Features
 
