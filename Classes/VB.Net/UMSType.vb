@@ -6,9 +6,10 @@ Imports YamlDotNet.Serialization.NamingConventions
 Namespace UMS
 
 
-' ─── Type Definition ───────────────────────────────────────────────────────────
+    ' ─── Type Definition ───────────────────────────────────────────────────────────
 
-Public Class TypeDefinition
+    Public Class TypeDefinition
+        Inherits UMS.ModelElement
 
         ''' <summary>
         ''' The name of the type e.g. Cinema, PersonLikesFilm
@@ -43,6 +44,13 @@ Public Class TypeDefinition
         Public Property Target As String = Nothing
 
         ''' <summary>
+        ''' For Document creation, when a relationship is embedded. E.g. "Person likes Film" (all of the Films, that are liked, are put in the Person object definition).
+        ''' I.e. Embeds from/within the Source, and where 'Person' is the Source in the example above (and 'Film' the Target). See Source and Target above.
+        ''' </summary>
+        ''' <returns></returns>
+        Public Property Embed As Boolean?
+
+        ''' <summary>
         ''' Relationship annotation for relationship types e.g. "Person -> Film"
         ''' </summary>
         Public Property RelationshipAnnotation As String
@@ -75,11 +83,11 @@ Public Class TypeDefinition
         ''' Returns True if this type is a relationship type (has RelationshipAnnotation)
         ''' </summary>
         Public ReadOnly Property IsRelationshipType As Boolean
-        Get
-            Return Not String.IsNullOrEmpty(RelationshipAnnotation)
-        End Get
-    End Property
+            Get
+                Return Not String.IsNullOrEmpty(RelationshipAnnotation)
+            End Get
+        End Property
 
-End Class
+    End Class
 
 End Namespace

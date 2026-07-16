@@ -34,6 +34,7 @@ Namespace UMS
 
         ''' <summary>
         ''' For Document creation, when a relationship is embedded. E.g. Cinema contains Row (all of the Rows are put in the Cinema object definition).
+        ''' I.e. Embeds from/within the Source, and where 'Cinema' is the Source in the example above (and Row the Target).
         ''' </summary>
         ''' <returns></returns>
         Public Property Embed As Boolean?
