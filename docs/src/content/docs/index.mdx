@@ -3,20 +3,31 @@ title: Unified Modelling Schema
 description: A portable, semantic model for relational, graph, document, and multi-model data.
 template: splash
 hero:
-  tagline: Model structure and meaning once. Use it across data platforms.
+  title: Unified Modelling Schema
+  tagline: A universal schema for data structure and meaning.
+  image:
+    html: '<img src="/Unified-Modelling-Schema/UMS-Logo-03.jpg" alt="Unified Modelling Schema" />'
   actions:
-    - text: Get started
+    - text: Get Started
       link: /Unified-Modelling-Schema/guides/getting-started/
       icon: right-arrow
-    - text: Browse the reference
-      link: /Unified-Modelling-Schema/reference/ums-schema/
+    - text: View Specification
+      link: /Unified-Modelling-Schema/reference/a-ums-schema/
       icon: open-book
       variant: minimal
 ---
+import { Card, CardGrid, Code } from '@astrojs/starlight/components';
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+<style is:global>{`
+  .hero h1 {
+    max-width: none;
+    white-space: nowrap;
+  }
+`}</style>
 
-## One model, many implementations
+## Model once. Use everywhere.
+
+Unified Modelling Schema captures both data structure and meaning in one portable model. Use the same schema across relational, graph, document, and multi-model systems.
 
 <CardGrid stagger>
 	<Card title="Start with the model" icon="pencil">
@@ -32,3 +43,618 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 		The reference explains how UMS concepts translate for relational, graph, document, and multi-model practitioners.
 	</Card>
 </CardGrid>
+
+<hr
+	style={{
+		marginBlock: '4rem',
+		border: 0,
+		borderTop: '1px solid var(--sl-color-gray-5)'
+	}}
+/>
+
+export const umsExample = `Types:
+  - Type: Person
+    Properties:
+      - Name: Id
+        DataType: Integer
+        Constraints:
+         - NOT NULL
+         - UNIQUE
+        FactTypeReadings:
+         - Language: English
+           Readings:
+            - Person has Id
+            - Id is for Person
+      - Name: LoginName
+        DataType: TextVariableLength
+        Constraints:
+         - NOT NULL
+         - UNIQUE
+        FactTypeReadings:
+         - Language: English
+           Readings:
+            - Person has LoginName
+            - LoginName is of Person
+
+      - Name: Name
+        DataType: Text`
+
+<div class="ums-example"
+	class="ums-example"
+	style={{
+		display: 'grid',
+		gridTemplateColumns: '1fr 1fr',
+		gap: '3rem',
+		alignItems: 'center'
+	}}
+>
+	<div>
+		<h2>Simple to read. Precise enough to implement.</h2>
+
+		<p>
+			UMS uses YAML to describe data structures together with their meaning.
+			A model remains readable by people while providing a structured definition
+			that software and AI can process.
+		</p>
+	</div>
+
+	<div>
+		<Code code={umsExample} lang="yaml" />
+	</div>
+</div>
+
+<section
+	style={{
+		background: 'var(--sl-color-gray-7)',
+		padding: '3rem',
+		borderRadius: '1rem',
+		marginBlock: '4rem'
+	}}
+>
+	<div
+		style={{
+			display: 'grid',
+			gridTemplateColumns: '0.8fr 1.2fr',
+			gap: '4rem'
+		}}
+	>
+		<div>
+			<h2>About Unified Modelling Schema</h2>
+
+			<p style={{ fontSize: '1.15rem' }}>
+				UMS provides a portable way to describe data structures,
+				constraints, relationships, and natural-language meaning
+				in one schema.
+			</p>
+		</div>
+
+		<div>
+			<div style={{
+				paddingBottom: '1.25rem',
+				borderBottom: '1px solid var(--sl-color-gray-5)'
+			}}>
+				<h3>Portable</h3>
+				<p>
+					Use one schema across relational, graph, document,
+					and multi-model platforms.
+				</p>
+			</div>
+
+			<div style={{
+				paddingBlock: '1.25rem',
+				borderBottom: '1px solid var(--sl-color-gray-5)'
+			}}>
+				<h3>Semantic</h3>
+				<p>
+					Capture natural-language readings alongside structural
+					definitions so meaning travels with the model.
+				</p>
+			</div>
+
+			<div style={{
+				paddingBlock: '1.25rem',
+				borderBottom: '1px solid var(--sl-color-gray-5)'
+			}}>
+				<h3>Implementation-aware</h3>
+				<p>
+					Describe keys, properties, constraints, relationships,
+					and target-specific details in a precise form.
+				</p>
+			</div>
+
+			<div style={{ paddingTop: '1.25rem' }}>
+				<h3>AI-ready</h3>
+				<p>
+					Provide structured schema information and explicit
+					natural-language predicates that AI systems can interpret.
+				</p>
+			</div>
+		</div>
+	</div>
+</section>
+
+<hr
+	style={{
+		marginBlock: '4rem',
+		border: 0,
+		borderTop: '1px solid var(--sl-color-gray-5)'
+	}}
+/>
+
+<div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+	<h2>One model. Many data paradigms.</h2>
+
+	<p style={{ maxWidth: '45rem', marginInline: 'auto' }}>
+		Data platforms express many of the same modelling concepts in different ways.
+		UMS provides a common schema in which those concepts can be described once
+		and carried across technologies.
+	</p>
+</div>
+
+<div
+	style={{
+		display: 'grid',
+		gridTemplateColumns: 'repeat(3, 1fr)',
+		gap: '2rem',
+		marginBottom: '4rem'
+	}}
+>
+	<div>
+		<h3>Relational</h3>
+		<p>
+			Describe tables, columns, keys, constraints, and relationships while
+			retaining the conceptual meaning behind them.
+		</p>
+	</div>
+
+	<div>
+		<h3>Graph</h3>
+		<p>
+			Describe nodes, properties, labels, relationships, and graph-oriented
+			structures using the same underlying model.
+		</p>
+	</div>
+
+	<div>
+		<h3>Multi-model</h3>
+		<p>
+			Bring relational, graph, document, and other representations together
+			within a single schema.
+		</p>
+	</div>
+</div>
+
+<section
+	style={{
+		background: 'linear-gradient(135deg, var(--sl-color-accent-low), var(--sl-color-gray-7))',
+		padding: '3rem',
+		borderRadius: '1rem',
+		marginBlock: '4rem'
+	}}
+>
+	<div
+		style={{
+			display: 'grid',
+			gridTemplateColumns: '1fr 1fr',
+			gap: '3rem',
+			alignItems: 'center'
+		}}
+	>
+		<div>
+			<h2>Meaning travels with the model.</h2>
+
+			<p>
+				UMS can include natural-language predicates alongside structural
+				definitions, giving people and AI systems an explicit description
+				of what the model means.
+			</p>
+
+			<p>
+				This makes the schema useful for documentation, interpretation,
+				automation, and AI-assisted modelling.
+			</p>
+		</div>
+
+		<div
+			style={{
+				background: 'var(--sl-color-bg)',
+				padding: '2rem',
+				borderRadius: '0.75rem',
+				border: '1px solid var(--sl-color-gray-5)'
+			}}
+		>
+			<p><strong>Person has Name</strong></p>
+			<p><strong>Name is for Person</strong></p>
+			<p><strong>Employee works for Company</strong></p>
+			<p><strong>Company employs Employee</strong></p>
+		</div>
+	</div>
+</section>
+
+<section style={{ marginBlock: '5rem' }}>
+	<div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+		<h2>What Unified Modelling Schema captures</h2>
+
+		<p style={{ maxWidth: '48rem', marginInline: 'auto' }}>
+			UMS provides a common vocabulary for describing the structural,
+			relational, semantic, and implementation-oriented parts of a data model.
+		</p>
+	</div>
+
+	<div
+		style={{
+			display: 'grid',
+			gridTemplateColumns: 'repeat(2, 1fr)',
+			gap: '1.5rem'
+		}}
+	>
+		<div style={{
+			padding: '2rem',
+			border: '1px solid var(--sl-color-gray-5)',
+			borderRadius: '0.75rem'
+		}}>
+			<h3>Types and properties</h3>
+			<p>
+				Define entity types, value types, properties, datatypes,
+				nullability, defaults, and other structural characteristics.
+			</p>
+		</div>
+
+		<div style={{
+			padding: '2rem',
+			border: '1px solid var(--sl-color-gray-5)',
+			borderRadius: '0.75rem'
+		}}>
+			<h3>Keys and constraints</h3>
+			<p>
+				Capture identifiers, uniqueness, mandatory values,
+				cardinality rules, and other constraints that govern valid data.
+			</p>
+		</div>
+
+		<div style={{
+			padding: '2rem',
+			border: '1px solid var(--sl-color-gray-5)',
+			borderRadius: '0.75rem'
+		}}>
+			<h3>Relationships</h3>
+			<p>
+				Describe associations between types, including roles,
+				direction, participation, and relationship-specific properties.
+			</p>
+		</div>
+
+		<div style={{
+			padding: '2rem',
+			border: '1px solid var(--sl-color-gray-5)',
+			borderRadius: '0.75rem'
+		}}>
+			<h3>Natural-language readings</h3>
+			<p>
+				Attach explicit predicates and inverse readings so the meaning
+				of the model remains available to people, documentation, and AI.
+			</p>
+		</div>
+
+		<div style={{
+			padding: '2rem',
+			border: '1px solid var(--sl-color-gray-5)',
+			borderRadius: '0.75rem'
+		}}>
+			<h3>Platform mappings</h3>
+			<p>
+				Express how a conceptual model maps into relational,
+				graph, document, and multi-model implementations.
+			</p>
+		</div>
+
+		<div style={{
+			padding: '2rem',
+			border: '1px solid var(--sl-color-gray-5)',
+			borderRadius: '0.75rem'
+		}}>
+			<h3>Extensible metadata</h3>
+			<p>
+				Carry additional annotations and target-specific information
+				without losing the shared model underneath.
+			</p>
+		</div>
+	</div>
+</section>
+
+<section
+	style={{
+		background: 'var(--sl-color-gray-7)',
+		padding: '3rem',
+		borderRadius: '1rem',
+		marginBlock: '5rem'
+	}}
+>
+	<div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+		<h2>One concept. Multiple implementations.</h2>
+
+		<p style={{ maxWidth: '48rem', marginInline: 'auto' }}>
+			UMS lets a single model carry across different database paradigms
+			while preserving the meaning of the original concept.
+		</p>
+	</div>
+
+	<div
+		style={{
+			display: 'grid',
+			gridTemplateColumns: 'repeat(3, 1fr)',
+			gap: '1.5rem'
+		}}
+	>
+		<div style={{
+			background: 'var(--sl-color-bg)',
+			padding: '2rem',
+			borderRadius: '0.75rem',
+			border: '1px solid var(--sl-color-gray-5)'
+		}}>
+			<h3>UMS</h3>
+			<p><strong>Person works for Company</strong></p>
+			<p>
+				The model defines the participating types, relationship,
+				roles, constraints, and natural-language readings.
+			</p>
+		</div>
+
+		<div style={{
+			background: 'var(--sl-color-bg)',
+			padding: '2rem',
+			borderRadius: '0.75rem',
+			border: '1px solid var(--sl-color-gray-5)'
+		}}>
+			<h3>Relational</h3>
+			<p><strong>Person</strong></p>
+			<p>CompanyId → Company.Id</p>
+			<p>
+				The relationship can be implemented using relational
+				keys and constraints.
+			</p>
+		</div>
+
+		<div style={{
+			background: 'var(--sl-color-bg)',
+			padding: '2rem',
+			borderRadius: '0.75rem',
+			border: '1px solid var(--sl-color-gray-5)'
+		}}>
+			<h3>Graph</h3>
+			<p><strong>(Person)-[:WORKS_FOR]→(Company)</strong></p>
+			<p>
+				The same relationship can be expressed directly as a
+				graph relationship between nodes.
+			</p>
+		</div>
+	</div>
+
+	<div
+		style={{
+			marginTop: '2rem',
+			padding: '2rem',
+			background: 'var(--sl-color-bg)',
+			borderRadius: '0.75rem',
+			border: '1px solid var(--sl-color-gray-5)'
+		}}
+	>
+		<h3>Meaning preserved</h3>
+		<p><strong>Person works for Company</strong></p>
+		<p><strong>Company employs Person</strong></p>
+	</div>
+</section>
+
+<section
+	style={{
+		marginBlock: '6rem',
+		padding: '4rem 3rem',
+		textAlign: 'center',
+		background: 'linear-gradient(135deg, var(--sl-color-accent-low), var(--sl-color-gray-7))',
+		borderRadius: '1.25rem'
+	}}
+>
+	<p style={{
+		textTransform: 'uppercase',
+		letterSpacing: '0.15em',
+		fontWeight: 'bold',
+		fontSize: '0.8rem'
+	}}>
+		Schema + Semantics + AI
+	</p>
+
+	<h2 style={{
+		fontSize: 'clamp(2.2rem, 5vw, 4rem)',
+		marginBlock: '1rem'
+	}}>
+		Your schema can explain itself.
+	</h2>
+
+	<p style={{
+		fontSize: '1.2rem',
+		maxWidth: '48rem',
+		marginInline: 'auto'
+	}}>
+		UMS combines machine-readable structure with human-readable meaning,
+		giving AI the context to understand what your data model represents.
+	</p>
+</section>
+
+<div
+	style={{
+		maxWidth: '50rem',
+		margin: '3rem auto 0'
+	}}
+>
+	<h3 style={{ textAlign: 'center', marginBottom: '2rem' }}>
+		Ask your model...
+	</h3>
+
+	<div
+		style={{
+			background: 'var(--sl-color-bg)',
+			border: '1px solid var(--sl-color-gray-5)',
+			borderRadius: '1rem',
+			padding: '1.5rem'
+		}}
+	>
+		<p>💬 &nbsp; What does Customer mean?</p>
+		<hr />
+
+		<p>💬 &nbsp; How is Order related to Customer?</p>
+		<hr />
+
+		<p>💬 &nbsp; Generate the relational schema.</p>
+		<hr />
+
+		<p>💬 &nbsp; Show this model as a property graph.</p>
+		<hr />
+
+		<p>💬 &nbsp; Explain this schema to a business analyst.</p>
+		<hr />
+
+		<p>💬 &nbsp; Compare these two models.</p>
+	</div>
+</div>
+
+<section style={{ marginBlock: '6rem' }}>
+
+	<div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+		<h2>From model to implementation.</h2>
+
+		<p style={{ maxWidth: '48rem', marginInline: 'auto' }}>
+			A UMS schema can become the common source for the artefacts
+			used throughout the data modelling and implementation lifecycle.
+		</p>
+	</div>
+
+	<div
+		style={{
+			display: 'grid',
+			gridTemplateColumns: '1fr auto 1fr',
+			gap: '2rem',
+			alignItems: 'center'
+		}}
+	>
+		<div
+			style={{
+				padding: '2.5rem',
+				border: '1px solid var(--sl-color-gray-5)',
+				borderRadius: '1rem',
+				textAlign: 'center'
+			}}
+		>
+			<p style={{
+				fontSize: '0.8rem',
+				textTransform: 'uppercase',
+				letterSpacing: '0.12em'
+			}}>
+				Source
+			</p>
+
+			<h3>UMS Schema</h3>
+
+			<p>
+				Types · Properties · Relationships<br />
+				Constraints · Readings · Semantics
+			</p>
+		</div>
+
+		<div style={{
+			fontSize: '2rem',
+			textAlign: 'center'
+		}}>
+			→
+		</div>
+
+		<div
+			style={{
+				padding: '2.5rem',
+				background: 'var(--sl-color-gray-7)',
+				borderRadius: '1rem'
+			}}
+		>
+			<h3>Generate and transform</h3>
+
+			<p>→ Relational DDL</p>
+			<p>→ Graph schemas</p>
+			<p>→ Documentation</p>
+			<p>→ Data model visualisations</p>
+			<p>→ AI context</p>
+			<p>→ Platform-specific representations</p>
+		</div>
+	</div>
+
+</section>
+
+<section
+	style={{
+		marginBlock: '6rem 3rem',
+		padding: '4rem 3rem',
+		textAlign: 'center',
+		background: 'var(--sl-color-accent-low)',
+		borderRadius: '1.25rem'
+	}}
+>
+	<p style={{
+		textTransform: 'uppercase',
+		letterSpacing: '0.15em',
+		fontWeight: 'bold',
+		fontSize: '0.8rem'
+	}}>
+		Open · Portable · Semantic
+	</p>
+
+	<h2 style={{
+		fontSize: 'clamp(2rem, 4vw, 3.25rem)',
+		marginBlock: '1rem'
+	}}>
+		Start modelling with UMS.
+	</h2>
+
+	<p style={{
+		fontSize: '1.15rem',
+		maxWidth: '42rem',
+		marginInline: 'auto',
+		marginBottom: '2rem'
+	}}>
+		Explore the specification, create your first Unified Modelling Schema,
+		and help shape a common language for data modelling.
+	</p>
+
+	<div
+		style={{
+			display: 'flex',
+			gap: '1rem',
+			justifyContent: 'center',
+			flexWrap: 'wrap'
+		}}
+	>
+		<a
+			href="/Unified-Modelling-Schema/guides/getting-started/"
+			style={{
+				padding: '0.8rem 1.4rem',
+				borderRadius: '2rem',
+				background: 'var(--sl-color-accent)',
+				color: 'var(--sl-color-black)',
+				fontWeight: 'bold',
+				textDecoration: 'none'
+			}}
+		>
+			Get Started →
+		</a>
+
+		<a
+			href="/Unified-Modelling-Schema/reference/a-ums-schema/"
+			style={{
+				padding: '0.8rem 1.4rem',
+				borderRadius: '2rem',
+				border: '1px solid var(--sl-color-gray-4)',
+				fontWeight: 'bold',
+				textDecoration: 'none'
+			}}
+		>
+			Read the Specification
+		</a>
+	</div>
+</section>
