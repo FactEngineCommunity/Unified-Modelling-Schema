@@ -19,6 +19,10 @@ Read the docs at: [Unified Modelling Schema](https://factenginecommunity.github.
 
 ![UMS Serialisation Classes](Model/Unified-Modelling-Schema-Classes.png?v=2)
 
+Class Hierarchy:
+
+![UMS Serialisation Classes](Model/UMS-Class-Hierarchy.png)
+
 ## Key Features
 
 **Storage-agnostic.** A UMS document makes no assumptions about where the data lives. The same schema can target a relational database, a property graph, a document store, a wide-column store, or a vector database without retranslating the semantics at each step.
