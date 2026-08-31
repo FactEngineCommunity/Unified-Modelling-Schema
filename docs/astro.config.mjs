@@ -17,7 +17,7 @@ export default defineConfig({
 			components: {
 			  SocialIcons: './src/components/HeaderLinks.astro',
 			},
-			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/FactEngineAI/UnifiedModellingSchema' }],
+			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/FactEngineCommunity/Unified-Modelling-Schema' }],
 			sidebar: [
 				{
 					label: 'Guide',
