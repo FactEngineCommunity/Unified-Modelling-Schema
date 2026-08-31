@@ -5,8 +5,8 @@ import starlight from '@astrojs/starlight';
 // https://astro.build/config
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://factenginecommunity.github.io',
-  base: '/Unified-Modelling-Schema/',
+  site: 'https://unified-modelling-schema.org',
+  base: '/',
   integrations: [
 		starlight({
 			title: 'Unified Modelling Schema',
