@@ -1,0 +1,44 @@
+/* Dark mode */
+:root[data-theme='dark'] {
+  /* Backgrounds */
+  --sl-color-bg: #0d1117;
+  --sl-color-bg-nav: #0d1117;
+  --sl-color-bg-sidebar: #0d1117;
+
+  /* Borders */
+  --sl-color-hairline-light: #30363d;
+  --sl-color-hairline: #21262d;
+
+  /* Accent */
+  --sl-color-accent-low: #2b2040;
+  --sl-color-accent: #b794f6;
+  --sl-color-accent-high: #e2d4ff;
+
+  /* Body text — Factum-style soft purple */
+  --sl-color-text: #c8b6e8;
+}
+
+
+/* Keep headings white */
+:root[data-theme='dark'] h1,
+:root[data-theme='dark'] h2,
+:root[data-theme='dark'] h3,
+:root[data-theme='dark'] h4,
+:root[data-theme='dark'] h5,
+:root[data-theme='dark'] h6 {
+  color: #ffffff;
+}
+
+
+/* Normal page text */
+:root[data-theme='dark'] .sl-markdown-content p,
+:root[data-theme='dark'] .sl-markdown-content li {
+  color: #c8b6e8;
+}
+
+/* Slightly larger normal page text and links */
+:root[data-theme='dark'] .sl-markdown-content p,
+:root[data-theme='dark'] .sl-markdown-content li,
+:root[data-theme='dark'] .sl-markdown-content a {
+  font-size: 1.05rem;
+}

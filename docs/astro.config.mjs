@@ -11,6 +11,12 @@ export default defineConfig({
 		starlight({
 			title: 'Unified Modelling Schema',
 			description: 'A portable, semantic schema for relational, graph, document, and multi-model data.',
+			customCss: [
+			  './src/styles/custom.css',
+			],
+			components: {
+			  SocialIcons: './src/components/HeaderLinks.astro',
+			},
 			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/FactEngineAI/UnifiedModellingSchema' }],
 			sidebar: [
 				{
