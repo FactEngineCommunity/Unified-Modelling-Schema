@@ -34,7 +34,7 @@ Use a relationship type for a graph edge that expresses a domain fact. Give it a
   FactTypeReadings:
     - Language: English
       Readings:
-        - Person likes Film
+        - {Person} likes {Film}
   IsRelationshipType: true
 ```
 

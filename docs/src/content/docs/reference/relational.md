@@ -15,7 +15,7 @@ For relational practitioners, UMS is a logical model that carries the informatio
 | `UniquenessConstraints` | Named `UNIQUE` constraints. |
 | `Relationships` | Foreign-key constraints from `From` to `To`. |
 | Relationship type | Associative table, possibly with attributes. |
-| `FactTypeReadings` | Documentation for table/column and relationship semantics. |
+| `Readings` | Documentation for table/column and relationship semantics. |
 
 ## Entity tables
 
@@ -28,7 +28,7 @@ For example, a `TextVariableLength` property with `Length: 100` might become `va
 Each relationship gives the mapping directly. Generate a foreign key from the source type’s `From` fields to the target type’s `To` fields. Preserve the sequence for composite keys.
 
 ```yaml
-- Name: IS_FOR
+- Name: BOOKING_IS_FOR_SESSION
   Source: Booking
   Target: Session
   From:
@@ -40,8 +40,8 @@ Each relationship gives the mapping directly. Generate a foreign key from the so
     - DateTime
     - Cinema_Id
   Readings:
-    - Booking is for Session
-    - Session has Booking
+    - {Booking} is for {Session}
+    - {Session} has {Booking}
 ```
 
 This becomes a three-column foreign key on `Booking`. The reading makes the intended business rule explicit, rather than leaving it implicit in a constraint name.

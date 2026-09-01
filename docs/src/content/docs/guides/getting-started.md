@@ -29,15 +29,15 @@ Start by identifying the things in the domain and the facts that connect them. T
       FactTypeReadings:
         - Language: English
           Readings:
-            - Person has LoginName
-            - LoginName is of Person
+            - {Person} has {LoginName}
+            - {LoginName} is of {Person}
   IsRelationshipType: false
 
 - Type: PersonLikesFilm
   Label: LIKES
   Source: Person
   Target: Film
-  RelationshipAnnotation: Person likes Film
+  RelationshipAnnotation: {Person} likes {Film}
   PrimaryKey:
     - Person_Id
     - Film_Id
@@ -50,7 +50,7 @@ Start by identifying the things in the domain and the facts that connect them. T
       To:
         - Person_Id
       Readings:
-        - PersonLikesFilm involves Person
+        - {PersonLikesFilm} involves {Person}
     - Name: FilmPersonLikesFilm
       Source: PersonLikesFilm
       Target: Film
@@ -59,11 +59,11 @@ Start by identifying the things in the domain and the facts that connect them. T
       To:
         - Film_Id
       Readings:
-        - PersonLikesFilm involves Film
+        - {PersonLikesFilm} involves {Film}
   FactTypeReadings:
     - Language: English
       Readings:
-        - Person likes Film
+        - {Person} likes {Film}
   IsRelationshipType: true
 ```
 

@@ -17,7 +17,7 @@ A UMS document is a YAML list. Each item is a `TypeDefinition`: either an entity
 | `Relationships` | Directed field mappings to other types. |
 | `Source`, `Target` | Endpoint types of a relationship type. |
 | `RelationshipAnnotation` | A readable statement of the relationship type. |
-| `FactTypeReadings` | Readings grouped by language. |
+| `Readings` | Readings grouped by language. |
 | `Facts` | Optional example or asserted facts grouped by language. |
 | `UniquenessConstraints` | Named unique combinations other than the primary key. |
 | `IsRelationshipType` | `true` for an association type; `false` for an entity type. |
@@ -38,7 +38,7 @@ Use portable types and state constraints explicitly. `NOT NULL` expresses mandat
   FactTypeReadings:
     - Language: English
       Readings:
-        - Person has LoginName
+        - {Person} has {LoginName}
 ```
 
 ## Relationships
@@ -55,7 +55,7 @@ A relationship has a `Name`, `Source`, `Target`, `From`, and `To`. `From` and `T
 FactTypeReadings:
   - Language: English
     Readings:
-      - Person likes Film
+      - {Person} likes {Film}
 ```
 
 The repository also contains an earlier JSON Schema and example YAML that use `TypeReadings` and `Readings` directly. Treat the language-grouped `FactTypeReadings` layout as the current documentation convention; align any validator or generator with the layout it consumes.

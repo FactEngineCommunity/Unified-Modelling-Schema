@@ -67,8 +67,8 @@ export const umsExample = `Types:
         FactTypeReadings:
          - Language: English
            Readings:
-            - Person has Id
-            - Id is for Person
+            - {Person} has {Id}
+            - {Id} is for {Person}
       - Name: LoginName
         DataType: TextVariableLength
         Constraints:
@@ -77,8 +77,8 @@ export const umsExample = `Types:
         FactTypeReadings:
          - Language: English
            Readings:
-            - Person has LoginName
-            - LoginName is of Person
+            - {Person} has {LoginName}
+            - {LoginName} is of {Person}
 
       - Name: Name
         DataType: Text`
@@ -104,6 +104,109 @@ export const umsExample = `Types:
 
 	<div>
 		<Code code={umsExample} lang="yaml" />
+	</div>
+</div>
+
+export const umsRelationshipExample = `- Type: PersonLikesFilm
+  Labels: 
+  Label: LIKES
+  Source: Person
+  Target: Film
+  RelationshipAnnotation: {Person} likes {Film}
+  PrimaryKey:
+  - Film_Id
+  - Person_Id
+  Properties:
+  - Name: Rating
+    FactBasedName: 
+    Alias: 
+    DataType: TextVariableLength
+    Length: 
+    Precision: 
+    Constraints: 
+    FactTypeReadings: 
+    Facts: 
+    IsArray: 
+    ArrayConstraints: 
+  - Name: Film_Id
+    FactBasedName: 
+    Alias: 
+    DataType: Integer
+    Length: 
+    Precision: 
+    Constraints:
+    - NotNull
+    FactTypeReadings: 
+    Facts: 
+    IsArray: 
+    ArrayConstraints: 
+  - Name: Person_Id
+    FactBasedName: 
+    Alias: 
+    DataType: Integer
+    Length: 
+    Precision: 
+    Constraints:
+    - NotNull
+    FactTypeReadings: 
+    Facts: 
+    IsArray: 
+    ArrayConstraints: 
+  Relationships:
+  - Name: FilmPersonLikesFilm
+    Label: 
+    Source: PersonLikesFilm
+    Target: Film
+    From:
+    - Film_Id
+    To:
+    - Film_Id
+    Embed: 
+    Cardinality: 
+    Readings:
+    - {PersonLikesFilm} involves {Film}
+    - {Film} is involved in {PersonLikesFilm}
+    Facts: 
+  - Name: PersonPersonLikesFilm
+    Label: 
+    Source: PersonLikesFilm
+    Target: Person
+    From:
+    - Person_Id
+    To:
+    - Person_Id
+    Embed: 
+    Cardinality: 
+    Readings:
+    - {PersonLikesFilm} involves {Person}
+    - {Person} is involved in {PersonLikesFilm}
+    Facts: 
+  FactTypeReadings:
+  - Language: Not Defined
+    Readings:
+    - {Person} likes {Film}
+  Facts: 
+  UniquenessConstraints: 
+  IsRelationshipType: true`
+
+<div class="ums-example"
+	class="ums-example"
+	style={{
+		display: 'grid',
+		gridTemplateColumns: '1fr',
+		gap: '1rem',
+		alignItems: 'center'
+	}}
+>
+	<div>
+		<h2>Relationships are First-Class Citizens.</h2>
+
+		<p>
+			Relationships are Types in their own right. They can be graph relationships or join tables, at the same time.
+		</p>
+	</div>
+	<div>
+		<Code code={umsRelationshipExample} lang="yaml" />
 	</div>
 </div>
 

@@ -34,8 +34,8 @@ Use an aggregate boundary when related data is created, read, and updated togeth
   Embed: true
   Cardinality: Many
   Readings:
-    - Seat is in Row
-    - Row contains Seat
+    - {Seat} is in {Row}
+    - {Row} contains {Seat}
 ```
 
 This states that a document projection may contain a collection of seats with its row. It does not imply that `Seat` loses its identity or cannot be referenced elsewhere.
