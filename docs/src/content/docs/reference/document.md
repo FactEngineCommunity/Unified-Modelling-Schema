@@ -22,7 +22,8 @@ For document practitioners, UMS is the canonical domain model before an aggregat
 Use an aggregate boundary when related data is created, read, and updated together. The UMS relationship remains explicit whether it is embedded or referenced, so the original model can be emitted to another storage style later.
 
 ```yaml
-- Name: IS_IN
+- Name: SEAT_IS_IN_ROW
+  Label: IS_IN
   Source: Seat
   Target: Row
   From:

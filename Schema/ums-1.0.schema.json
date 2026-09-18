@@ -1,114 +1,156 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/FactEngineAI/UnifiedModellingSchema/schema/ums-1.0.schema.json",
+  "$id": "https://github.com/FactEngineCommunity/Unified-Modelling-Schema/schema/ums-1.0.schema.json",
   "title": "Unified Modelling Schema (UMS) 1.0",
-  "description": "Validates a UMS YAML document representing a data model across graph, relational, multi-model, fact-based, and AI databases.",
-  "type": "array",
-  "minItems": 1,
-  "items": {
-    "$ref": "#/$defs/TypeDefinition"
-  },
+  "description": "Validates a UMS YAML document. A document is a single Model containing an ordered list of ModelElements (TypeDefinitions and, optionally, FBMConstraints) representing a data model across graph, relational, multi-model, fact-based, and AI databases.",
+
+  "$ref": "#/$defs/Model",
 
   "$defs": {
+
+    "Model": {
+      "type": "object",
+      "description": "The root object of a UMS document.",
+      "required": ["Name", "ModelElement"],
+      "properties": {
+
+        "Name": {
+          "type": ["string", "null"],
+          "description": "The name of the model, e.g. CinemaBookings."
+        },
+
+        "UMSVersionNr": {
+          "type": ["string", "number", "null"],
+          "description": "The version of the UMS standard used to write this document. Defaults to \"0.1\" in the reference implementation. Accepts number as well as string because an unquoted value like 0.1 is parsed by YAML as a float, not a string, even though the underlying .NET property is a String — quote version numbers in YAML (e.g. \"0.1\") to avoid this.",
+          "default": "0.1"
+        },
+
+        "ModelVersionNr": {
+          "type": ["string", "number", "null"],
+          "description": "The version number of this model, if the modeller tracks one. See the note on UMSVersionNr about quoting numeric-looking values in YAML."
+        },
+
+        "ModelElement": {
+          "type": "array",
+          "description": "The ordered list of model elements: entity/relationship TypeDefinitions and, optionally, FBMConstraints.",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/ModelElement"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+
+    "ModelElement": {
+      "description": "A single element of the model. Discriminated structurally: a 'Type' key marks a TypeDefinition, a 'Verbalisation' key marks an FBMConstraint.",
+      "oneOf": [
+        { "$ref": "#/$defs/TypeDefinition" },
+        { "$ref": "#/$defs/FBMConstraint" }
+      ]
+    },
 
     "TypeDefinition": {
       "type": "object",
       "description": "A single entity type or relationship type in the model.",
-      "required": ["Type", "IsRelationshipType"],
+      "required": ["Type"],
       "properties": {
 
         "Type": {
           "type": "string",
           "minLength": 1,
-          "description": "The name of the entity or relationship type."
+          "description": "The name of the entity or relationship type, e.g. Cinema, PersonLikesFilm."
         },
 
         "Labels": {
-          "type": "array",
+          "type": ["array", "null"],
           "description": "Graph labels or relational table names for this type. Used on entity types.",
           "minItems": 1,
-          "items": {
-            "type": "string",
-            "minLength": 1
-          }
+          "items": { "type": "string", "minLength": 1 }
         },
 
         "Label": {
-          "type": "string",
-          "minLength": 1,
-          "description": "Short edge label for relationship types (e.g. LIKES, HAS). Used on relationship types."
+          "type": ["string", "null"],
+          "description": "Short graph edge label for relationship types (e.g. LIKES, HAS). Used on relationship types."
         },
 
         "Source": {
-          "type": "string",
-          "minLength": 1,
-          "description": "The source entity type of a relationship type."
+          "type": ["string", "null"],
+          "description": "The source type, e.g. Person in Person-LIKES->Film. Populated only when this Type is a relationship type."
         },
 
         "Target": {
-          "type": "string",
-          "minLength": 1,
-          "description": "The target entity type of a relationship type."
+          "type": ["string", "null"],
+          "description": "The target type, e.g. Film in Person-LIKES->Film. Populated only when this Type is a relationship type."
+        },
+
+        "Embed": {
+          "type": ["boolean", "null"],
+          "description": "For document creation: whether this relationship type is embedded within its Source's object definition."
         },
 
         "RelationshipAnnotation": {
-          "type": "string",
-          "minLength": 1,
-          "description": "A human-readable annotation describing the relationship (e.g. 'Person likes Film')."
+          "type": ["string", "null"],
+          "description": "Human-readable annotation describing the relationship, e.g. 'Person likes Film'. Presence of a non-empty value is what marks this Type as a relationship type."
         },
 
         "PrimaryKey": {
-          "type": "array",
-          "description": "The list of property names that form the primary key for this type.",
+          "type": ["array", "null"],
+          "description": "The ordered list of property names that form the primary key for this type.",
           "minItems": 1,
-          "items": {
-            "type": "string",
-            "minLength": 1
-          }
+          "items": { "type": "string", "minLength": 1 }
         },
 
         "Properties": {
-          "type": "array",
+          "type": ["array", "null"],
           "description": "The list of properties belonging to this type.",
           "minItems": 1,
-          "items": {
-            "$ref": "#/$defs/PropertyDefinition"
-          }
+          "items": { "$ref": "#/$defs/PropertyDefinition" }
         },
 
         "Relationships": {
-          "type": "array",
-          "description": "The list of relationships this type participates in as source.",
+          "type": ["array", "null"],
+          "description": "The list of relationships (foreign-key style links) this type participates in as source.",
           "minItems": 1,
-          "items": {
-            "$ref": "#/$defs/RelationshipDefinition"
-          }
+          "items": { "$ref": "#/$defs/RelationshipDefinition" }
         },
 
-        "TypeReadings": {
-          "type": "array",
-          "description": "Natural-language readings for the type as a whole, expressing its role in the domain.",
+        "FactTypeReadings": {
+          "type": ["array", "null"],
+          "description": "Natural-language readings for the type as a whole, grouped by language.",
           "minItems": 1,
-          "items": {
-            "type": "string",
-            "minLength": 1
-          }
+          "items": { "$ref": "#/$defs/FactTypeReadings" }
+        },
+
+        "Facts": {
+          "type": ["array", "null"],
+          "description": "Fact-Based Modelling instance facts for this type, grouped by language.",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/Facts" }
+        },
+
+        "UniquenessConstraints": {
+          "type": ["array", "null"],
+          "description": "Multi-column uniqueness constraints on this type (beyond the primary key).",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/UniquenessConstraint" }
         },
 
         "IsRelationshipType": {
           "type": "boolean",
-          "description": "True if this type is an association or relationship type; false if it is an entity type."
+          "description": "True if this type is an association/relationship type, false if it is an entity type. This is a computed, read-only value in the reference implementation (derived from RelationshipAnnotation being non-empty) — it is typically present in generated documents but is not required when authoring one by hand."
         }
       },
 
       "if": {
+        "required": ["RelationshipAnnotation"],
         "properties": {
-          "IsRelationshipType": { "const": true }
+          "RelationshipAnnotation": { "type": "string", "minLength": 1 }
         }
       },
       "then": {
-        "description": "Relationship types must carry a Label and RelationshipAnnotation.",
-        "required": ["Label", "RelationshipAnnotation"]
+        "description": "Relationship types must carry Source and Target.",
+        "required": ["Source", "Target"]
       },
       "else": {
         "description": "Entity types must carry at least one Label.",
@@ -127,72 +169,117 @@
         "Name": {
           "type": "string",
           "minLength": 1,
-          "description": "The property name."
+          "description": "The property name, e.g. Id, Name, CinemaId."
+        },
+
+        "FactBasedName": {
+          "type": ["string", "null"],
+          "description": "The Fact-Based Modelling alias/name for the property, if different from Name, e.g. 'First Name' for FirstName."
+        },
+
+        "Alias": {
+          "type": ["string", "null"],
+          "description": "Optional alias / role name, e.g. 'Cinema Name', 'Film Title'."
         },
 
         "DataType": {
           "type": "string",
           "description": "The portable UMS data type for this property.",
           "enum": [
-            "TextVariableLength",
-            "TextFixedLength",
             "Integer",
-            "Decimal",
-            "Float",
-            "Boolean",
             "DateTime",
-            "Date",
-            "Binary",
-            "UUID"
+            "TextFixedLength",
+            "TextVariableLength"
           ]
         },
 
         "Length": {
-          "type": "integer",
+          "type": ["integer", "null"],
           "minimum": 0,
-          "description": "Maximum length for text properties. 0 indicates unbounded."
+          "description": "Length for data types that use one, e.g. TextFixedLength(100). Null/omitted for all other data types."
+        },
+
+        "Precision": {
+          "type": ["integer", "null"],
+          "minimum": 0,
+          "description": "E.g. number of decimal places, where Length is the overall length. Null/omitted for data types without precision."
         },
 
         "Constraints": {
-          "type": "array",
-          "description": "Constraints applied to this property.",
+          "type": ["array", "null"],
+          "description": "Constraints applied to this property. Both 'NotNull'/'Unique' (default enum serialisation, as seen in current example documents) and 'NOT NULL'/'UNIQUE' (as emitted by the registered ConstraintConverter) are accepted — see note to Victor about reconciling these.",
           "minItems": 1,
           "items": {
             "type": "string",
-            "enum": [
-              "NOT NULL",
-              "UNIQUE",
-              "PRIMARY KEY",
-              "CHECK",
-              "DEFAULT"
-            ]
+            "enum": ["NotNull", "NOT NULL", "Unique", "UNIQUE"]
           }
         },
 
-        "Readings": {
-          "type": "array",
-          "description": "Natural-language ORM verbalisations for this property, expressing elementary facts.",
+        "FactTypeReadings": {
+          "type": ["array", "null"],
+          "description": "Natural-language ORM verbalisations for this property, grouped by language.",
           "minItems": 1,
-          "items": {
-            "type": "string",
-            "minLength": 1
-          }
+          "items": { "$ref": "#/$defs/FactTypeReadings" }
+        },
+
+        "Facts": {
+          "type": ["array", "null"],
+          "description": "Fact-Based Modelling instance facts for this property, grouped by language.",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/Facts" }
+        },
+
+        "IsArray": {
+          "type": ["boolean", "null"],
+          "description": "Whether this property holds an array of values, e.g. PhoneNumbers."
+        },
+
+        "ArrayConstraints": {
+          "description": "Constraints on the array, when IsArray is true.",
+          "oneOf": [
+            { "$ref": "#/$defs/ArrayConstraints" },
+            { "type": "null" }
+          ]
         }
       },
+      "additionalProperties": false
+    },
 
+    "ArrayConstraints": {
+      "type": "object",
+      "description": "Constraints on an array-valued property.",
+      "properties": {
+        "MinItems": {
+          "type": ["integer", "null"],
+          "minimum": 0
+        },
+        "MaxItems": {
+          "type": ["integer", "null"],
+          "minimum": 0
+        },
+        "Unique": {
+          "type": ["boolean", "null"],
+          "description": "Whether array elements must be distinct."
+        }
+      },
       "additionalProperties": false
     },
 
     "RelationshipDefinition": {
       "type": "object",
-      "description": "A directed relationship between two types, with foreign key mappings and readings.",
-      "required": ["Name", "Source", "Target", "From", "To", "Readings"],
+      "description": "A directed relationship between two types, with foreign-key-style property mappings and readings.",
+      "required": ["Name", "Source", "Target", "From", "To"],
       "properties": {
 
         "Name": {
           "type": "string",
           "minLength": 1,
-          "description": "The name of this relationship."
+          "description": "The name of this relationship, e.g. FK_Session_Cinema, IS_IN."
+        },
+
+        "Label": {
+          "type": ["string", "null"],
+          "description": "Graph label, e.g. IS_AT, IS_FOR, IS_IN. Optional — relationship types may omit the label on their own FK entries."
         },
 
         "Source": {
@@ -211,35 +298,119 @@
           "type": "array",
           "description": "The property names on the source type that form the foreign key.",
           "minItems": 1,
-          "items": {
-            "type": "string",
-            "minLength": 1
-          }
+          "items": { "type": "string", "minLength": 1 }
         },
 
         "To": {
           "type": "array",
           "description": "The corresponding property names on the target type.",
           "minItems": 1,
-          "items": {
-            "type": "string",
-            "minLength": 1
-          }
+          "items": { "type": "string", "minLength": 1 }
+        },
+
+        "Embed": {
+          "type": ["boolean", "null"],
+          "description": "For document creation: whether this relationship is embedded from/within the Source, e.g. Cinema contains Row."
+        },
+
+        "Cardinality": {
+          "description": "The cardinality of the embedded list, when Embed is true.",
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": ["One", "Many", "ZeroOrOne", "ZeroOrMore"]
+            },
+            { "type": "null" }
+          ]
         },
 
         "Readings": {
-          "type": "array",
+          "type": ["array", "null"],
           "description": "Natural-language ORM verbalisations for this relationship, in both directions where applicable.",
           "minItems": 1,
-          "items": {
-            "type": "string",
-            "minLength": 1
-          }
+          "items": { "type": "string", "minLength": 1 }
+        },
+
+        "Facts": {
+          "type": ["array", "null"],
+          "description": "Fact-Based Modelling instance facts for this relationship, grouped by language.",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/Facts" }
         }
       },
+      "additionalProperties": false
+    },
 
+    "FactTypeReadings": {
+      "type": "object",
+      "description": "A set of natural-language readings for a given language.",
+      "required": ["Readings"],
+      "properties": {
+        "Language": {
+          "type": ["string", "null"],
+          "description": "E.g. English, Dutch, German, or 'Not Defined'."
+        },
+        "Readings": {
+          "type": "array",
+          "description": "E.g. 'Part is in Bin in Warehouse', 'Bin houses Part in Bin'.",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 }
+        }
+      },
+      "additionalProperties": false
+    },
+
+    "Facts": {
+      "type": "object",
+      "description": "A set of Fact-Based Modelling instance facts for a given language.",
+      "required": ["Facts"],
+      "properties": {
+        "Language": {
+          "type": ["string", "null"],
+          "description": "E.g. English, Dutch, German, or 'Not Defined'."
+        },
+        "Facts": {
+          "type": "array",
+          "description": "E.g. \"Person, 1, has First Name, 'Peter'.\"",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 }
+        }
+      },
+      "additionalProperties": false
+    },
+
+    "UniquenessConstraint": {
+      "type": "object",
+      "description": "A multi-column uniqueness constraint on a type, beyond its primary key.",
+      "required": ["Name", "Properties"],
+      "properties": {
+        "Name": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The unique name of the constraint within the model, e.g. UQ_Person_LoginName."
+        },
+        "Properties": {
+          "type": "array",
+          "description": "The property/column names covered by the constraint.",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 }
+        }
+      },
+      "additionalProperties": false
+    },
+
+    "FBMConstraint": {
+      "type": "object",
+      "description": "A Fact-Based Modelling constraint expressed in controlled natural language, for constraints not otherwise covered by PrimaryKey/UniquenessConstraints on a Type (e.g. join-subset constraints).",
+      "required": ["Verbalisation"],
+      "properties": {
+        "Verbalisation": {
+          "type": "string",
+          "minLength": 1,
+          "description": "E.g. 'If some Booking has some Seat then that Booking is for some Session that is at some Cinema that contains some Row that contains that Seat.'"
+        }
+      },
       "additionalProperties": false
     }
-
   }
 }
